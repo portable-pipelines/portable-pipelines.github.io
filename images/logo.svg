@@ -1,15 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
   <title id="title">Portable Pipelines</title>
-  <rect width="64" height="64" rx="12" fill="#101612"/>
-  <!-- barrel -->
-  <rect x="8" y="27" width="48" height="10" rx="2" fill="#7ec87e"/>
-  <!-- left flange -->
-  <rect x="14" y="21" width="5" height="22" rx="1.2" fill="#d4b45a"/>
-  <!-- right flange -->
-  <rect x="45" y="21" width="5" height="22" rx="1.2" fill="#d4b45a"/>
-  <!-- coupler ring -->
-  <circle cx="32" cy="32" r="12" fill="#101612" stroke="#d4b45a" stroke-width="3"/>
-  <circle cx="32" cy="32" r="12" fill="none" stroke="#7ec87e" stroke-width="1.25" opacity="0.85"/>
-  <!-- pipe character -->
-  <rect x="30" y="22" width="4" height="20" rx="1" fill="#7ec87e"/>
+  <rect width="64" height="64" rx="12" fill="#100f0c"/>
+  <!-- split connectors (secondary stream) -->
+  <path d="M26 32h8M34 32L41 18M34 32L41 46" fill="none" stroke="#dbb56a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- stage boxes -->
+  <rect x="6" y="22" width="20" height="20" rx="4" fill="#1c1b16" stroke="#9dcc8e" stroke-width="2"/>
+  <rect x="41" y="8" width="17" height="17" rx="4" fill="#1c1b16" stroke="#9dcc8e" stroke-width="2"/>
+  <rect x="41" y="39" width="17" height="17" rx="4" fill="#1c1b16" stroke="#9dcc8e" stroke-width="2"/>
+  <!-- records -->
+  <rect x="11" y="29" width="10" height="6" rx="1.5" fill="#a39a8c"/>
+  <rect x="45" y="13.5" width="9" height="6" rx="1.5" fill="#9dcc8e"/>
+  <rect x="45" y="44.5" width="9" height="6" rx="1.5" fill="#dbb56a"/>
 </svg>

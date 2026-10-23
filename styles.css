@@ -124,17 +124,17 @@ code {
 }
 
 .logo {
-  width: 72px;
-  height: 72px;
+  width: 96px;
+  height: 96px;
   flex: none;
-  border-radius: 12px;
+  border-radius: 14px;
   box-shadow: 0 0 0 1px var(--line);
 }
 
 .site-name {
   margin: 0;
   font-family: var(--mono);
-  font-size: clamp(1.3rem, 3.6vw, 1.75rem);
+  font-size: clamp(1.4rem, 4vw, 1.95rem);
   font-weight: 600;
   letter-spacing: 0.01em;
   line-height: 1.2;
@@ -363,8 +363,9 @@ li + li {
   }
 
   .logo {
-    width: 56px;
-    height: 56px;
+    width: 72px;
+    height: 72px;
+    border-radius: 12px;
   }
 
   nav {
