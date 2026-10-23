@@ -99,12 +99,14 @@
             <code>SELECT INPUT n</code>, and <code>SELECT OUTPUT n</code>.
           </li>
           <li>
-            A Python file is a stage too. You name the <code>.py</code> path as
-            the verb; there is no <code>PYTHON</code> keyword. Each such stage
-            runs as its own Python 3.10 or later process.
-            <code>.rexx</code> and <code>.py</code> stages can sit next to each
-            other in the same pipeline, which is handy when one language
-            already has the library you need.
+            You can write a stage in Python. A Python stage is a program you
+            write in Python that reads records from its input and writes
+            records to its output. A <code>.py</code> file is just another
+            stage in the pipeline; you use it by naming the file, just as you
+            do with a REXX stage. Each Python stage runs as its own Python 3.10
+            or later process. You can put REXX and Python stages next to each
+            other in the same pipeline when one language already has the
+            library you need.
           </li>
           <li>
             Built-in stages cover a lot of everyday work: selecting records
@@ -211,10 +213,9 @@ miss=banana</code></pre>
           <figcaption>Mixing a REXX producer with a Python filter</figcaption>
           <p class="example-note">
             <code>emit.rexx</code> writes a few records, then
-            <code>upper.py</code> uppercases each one. A <code>.rexx</code>
-            path and a <code>.py</code> path are both ordinary stages, so you
-            can put them next to each other when that is the simplest way to
-            get the work done.
+            <code>upper.py</code> uppercases each one. You use a Python stage
+            by naming the file, just as you do with a REXX stage, so the two
+            can sit next to each other in the same pipeline.
           </p>
           <div class="term" role="group" aria-label="Terminal: REXX and Python">
             <div class="term-bar" aria-hidden="true">
