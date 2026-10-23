@@ -1,17 +1,17 @@
 /* Portable Pipelines public site. System fonts only. No CDNs. */
 
 :root {
-  --bg: #0e1210;
-  --bg-raised: #151a17;
-  --ink: #d7ddd8;
-  --muted: #8e9890;
-  --phosphor: #86c98a;
-  --phosphor-dim: #5a9a60;
-  --amber: #d4b45a;
-  --term-bg: #070908;
-  --term-ink: #c5e0c4;
-  --line: #2a332c;
-  --focus: #d4b45a;
+  --bg: #141310;
+  --bg-raised: #1c1b16;
+  --ink: #e4ddd3;
+  --muted: #a39a8c;
+  --phosphor: #9dcc8e;
+  --phosphor-dim: #6a9a62;
+  --amber: #dbb56a;
+  --term-bg: #0e0f0c;
+  --term-ink: #cfe0c6;
+  --line: #3a382f;
+  --focus: #dbb56a;
   --sans: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --mono: ui-monospace, "Cascadia Code", "SF Mono", Consolas, "Liberation Mono",
     Menlo, monospace;
@@ -46,12 +46,12 @@ body {
   color: var(--ink);
   font-family: var(--sans);
   font-size: 1.0625rem;
-  line-height: 1.55;
+  line-height: 1.65;
   min-height: 100vh;
 }
 
 .wrap {
-  width: min(100% - 2rem, var(--wrap));
+  width: min(100% - 2.25rem, var(--wrap));
   margin-inline: auto;
 }
 
@@ -78,7 +78,7 @@ a {
 }
 
 a:hover {
-  color: #b6e4b8;
+  color: #c5e4b8;
 }
 
 a:focus-visible,
@@ -98,7 +98,7 @@ code {
 
 .masthead {
   border-bottom: 1px solid var(--line);
-  background: #0b0f0d;
+  background: #100f0c;
 }
 
 .masthead-inner {
@@ -106,8 +106,8 @@ code {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem 1.5rem;
-  padding: 1.35rem 0 1.2rem;
+  gap: 1.15rem 1.75rem;
+  padding: 1.6rem 0 1.45rem;
 }
 
 .brand {
@@ -134,27 +134,28 @@ code {
 .site-name {
   margin: 0;
   font-family: var(--mono);
-  font-size: clamp(1.35rem, 4vw, 1.85rem);
+  font-size: clamp(1.3rem, 3.6vw, 1.75rem);
   font-weight: 600;
   letter-spacing: 0.01em;
-  line-height: 1.15;
-  color: #eef3ee;
+  line-height: 1.2;
+  color: #f1ebe3;
 }
 
 .tagline {
-  margin: 0.28rem 0 0;
+  margin: 0.4rem 0 0;
   color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.35;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  max-width: 28rem;
 }
 
 nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 1.15rem;
+  gap: 0.4rem 1.2rem;
   font-family: var(--mono);
-  font-size: 0.82rem;
-  letter-spacing: 0.06em;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
@@ -168,53 +169,60 @@ nav a:hover {
 }
 
 main {
-  padding: 1.75rem 0 3rem;
+  padding: 2.15rem 0 3.6rem;
 }
 
 .lede {
   font-size: 1.12rem;
-  margin-top: 0.35rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.1rem;
 }
 
 h2 {
-  margin: 2.4rem 0 0.85rem;
-  padding-left: 0.7rem;
-  border-left: 3px solid var(--phosphor);
+  margin: 2.75rem 0 1rem;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--amber);
   font-family: var(--mono);
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--phosphor);
+  color: var(--amber);
 }
 
 section p,
 section ul {
-  margin: 0.75rem 0;
+  margin: 0.9rem 0;
 }
 
 ul {
-  padding-left: 1.2rem;
+  padding-left: 1.25rem;
 }
 
 li + li {
-  margin-top: 0.55rem;
+  margin-top: 0.8rem;
 }
 
 .example {
-  margin: 1.5rem 0 0;
+  margin: 2.1rem 0 0;
 }
 
 .example figcaption {
-  margin: 0 0 0.45rem;
+  margin: 0 0 0.55rem;
   font-weight: 600;
-  color: #e7eee7;
+  font-size: 1.05rem;
+  color: #f0ebe3;
 }
 
 .example-note {
-  margin: 0 0 0.7rem;
+  margin: 0 0 0.85rem;
   color: var(--muted);
-  font-size: 0.98rem;
+  font-size: 1rem;
+}
+
+.example .example-note:last-child {
+  margin-top: 0.9rem;
+  margin-bottom: 0;
 }
 
 .term {
@@ -222,15 +230,16 @@ li + li {
   border: 1px solid var(--line);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+  max-width: 100%;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
 }
 
 .term-bar {
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.45rem 0.7rem;
-  background: #121816;
+  padding: 0.5rem 0.8rem;
+  background: #16150f;
   border-bottom: 1px solid var(--line);
 }
 
@@ -265,36 +274,60 @@ li + li {
 
 .term-body {
   margin: 0;
-  padding: 0.85rem 0.95rem 1rem;
+  padding: 0.95rem 1rem 0.85rem;
   overflow-x: auto;
   font-family: var(--mono);
   font-size: 0.8rem;
-  line-height: 1.45;
-  color: var(--term-ink);
+  line-height: 1.5;
+  color: var(--amber);
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   tab-size: 2;
 }
 
 .term-body .cmd {
-  display: block;
   color: var(--amber);
-  margin-bottom: 0.55rem;
 }
 
-.term-body-long {
-  font-size: 0.72rem;
+.term-keep {
+  white-space: pre;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overflow-wrap: normal;
+  word-break: normal;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.term-keep code {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+  white-space: pre;
+}
+
+.term-out {
+  margin: 0;
+  padding: 0.75rem 1rem 1rem;
+  border-top: 1px dashed var(--line);
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--term-ink);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .site-footer {
   border-top: 1px solid var(--line);
-  padding: 1.4rem 0 2.2rem;
+  padding: 1.6rem 0 2.4rem;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
 }
 
 .site-footer p {
-  margin: 0.35rem 0;
+  margin: 0.4rem 0;
 }
 
 @media (max-width: 640px) {
@@ -305,7 +338,7 @@ li + li {
   .masthead-inner {
     flex-direction: column;
     align-items: flex-start;
-    padding: 1.1rem 0 1rem;
+    padding: 1.2rem 0 1.1rem;
   }
 
   .logo {
@@ -325,7 +358,8 @@ li + li {
     font-size: 1.05rem;
   }
 
-  .term-body {
+  .term-body,
+  .term-out {
     font-size: 0.74rem;
   }
 }
