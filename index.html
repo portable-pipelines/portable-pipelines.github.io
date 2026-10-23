@@ -295,6 +295,54 @@ control total OK: 5 rows, 48 units, 5760.00</code></pre>
             details and compares them with the printed TOTAL.
           </p>
         </figure>
+
+        <h3 id="python-stage">How that Python stage talks to the pipeline</h3>
+        <p>
+          The JSON conversion is <code>examples/showcase/tsv2json.py</code>. A
+          Python stage talks to the pipeline the way a REXX stage issues
+          pipeline subcommands. Here is the whole file:
+        </p>
+        <div class="term" role="group" aria-label="Source: tsv2json.py">
+          <div class="term-bar" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <em>tsv2json.py</em>
+          </div>
+          <pre class="source-body"><code># tsv2json.py NAME[:TYPE] ... - turn tab-separated records into JSON Lines.
+#
+# One argument per column, in order. TYPE is str (default), int, or
+# cents (a money amount such as 1,440.00 written as the integer 144000,
+# so no float rounding ever reaches the JSON).
+import json
+from decimal import Decimal
+
+import pipelines as p
+
+cols = [(a.split(":") + ["str"])[:2] for a in p.args]
+for rec in p.records():
+    values = rec.decode("utf-8", "replace").split("\t")
+    obj = {}
+    for (name, kind), raw in zip(cols, values):
+        raw = raw.strip()
+        if kind == "int":
+            obj[name] = int(raw.replace(",", ""))
+        elif kind == "cents":
+            obj[name] = int(Decimal(raw.replace(",", "")) * 100)
+        else:
+            obj[name] = raw
+    p.output(json.dumps(obj, ensure_ascii=False))
+</code></pre>
+        </div>
+        <p>
+          <code>import pipelines as p</code> gives the stage its connection to
+          the pipeline. <code>p.args</code> holds the operands written after
+          the file name in the pipeline (here
+          <code>branch region rep units:int amount_cents:cents</code>).
+          <code>for rec in p.records():</code> reads each input record in
+          turn, much as a REXX stage reads with <code>READTO</code> in a loop.
+          <code>p.output(...)</code> writes a record to the output stream,
+          like the REXX <code>OUTPUT</code> subcommand. The stage ends when its
+          input runs out.
+        </p>
       </section>
 
       <section id="install" aria-labelledby="install-heading">

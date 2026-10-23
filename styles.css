@@ -190,6 +190,27 @@ h2 {
   color: var(--amber);
 }
 
+h3 {
+  margin: 2.2rem 0 0.85rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #f0ebe3;
+}
+
+.source-body {
+  margin: 0;
+  padding: 0.95rem 1rem 1rem;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--term-ink);
+  white-space: pre;
+  overflow-wrap: normal;
+  word-break: normal;
+  tab-size: 4;
+}
+
 section p,
 section ul {
   margin: 0.9rem 0;
@@ -359,7 +380,8 @@ li + li {
   }
 
   .term-body,
-  .term-out {
+  .term-out,
+  .source-body {
     font-size: 0.74rem;
   }
 }
