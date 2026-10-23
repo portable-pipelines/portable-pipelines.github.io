@@ -1,0 +1,387 @@
+/* Portable Pipelines public site. System fonts only. No CDNs. */
+
+:root {
+  --bg: #141310;
+  --bg-raised: #1c1b16;
+  --ink: #e4ddd3;
+  --muted: #a39a8c;
+  --phosphor: #9dcc8e;
+  --phosphor-dim: #6a9a62;
+  --amber: #dbb56a;
+  --term-bg: #0e0f0c;
+  --term-ink: #cfe0c6;
+  --line: #3a382f;
+  --focus: #dbb56a;
+  --sans: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, "Cascadia Code", "SF Mono", Consolas, "Liberation Mono",
+    Menlo, monospace;
+  --wrap: 48rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  min-height: 100vh;
+}
+
+.wrap {
+  width: min(100% - 2.25rem, var(--wrap));
+  margin-inline: auto;
+}
+
+.skip {
+  position: absolute;
+  left: 0.75rem;
+  top: -3rem;
+  z-index: 20;
+  padding: 0.4rem 0.7rem;
+  background: var(--amber);
+  color: #111;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip:focus {
+  top: 0.75rem;
+}
+
+a {
+  color: var(--phosphor);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: #c5e4b8;
+}
+
+a:focus-visible,
+.brand:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  color: var(--phosphor);
+  background: var(--bg-raised);
+  padding: 0.08em 0.32em;
+  border-radius: 3px;
+}
+
+.masthead {
+  border-bottom: 1px solid var(--line);
+  background: #100f0c;
+}
+
+.masthead-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.15rem 1.75rem;
+  padding: 1.6rem 0 1.45rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+  color: inherit;
+  text-decoration: none;
+  min-width: 0;
+}
+
+.brand:hover {
+  color: inherit;
+}
+
+.logo {
+  width: 72px;
+  height: 72px;
+  flex: none;
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+.site-name {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: clamp(1.3rem, 3.6vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  color: #f1ebe3;
+}
+
+.tagline {
+  margin: 0.4rem 0 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.45;
+  max-width: 28rem;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+nav a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: var(--phosphor);
+}
+
+main {
+  padding: 2.15rem 0 3.6rem;
+}
+
+.lede {
+  font-size: 1.12rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.1rem;
+}
+
+h2 {
+  margin: 2.75rem 0 1rem;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--amber);
+  font-family: var(--mono);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+h3 {
+  margin: 2.2rem 0 0.85rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #f0ebe3;
+}
+
+.source-body {
+  margin: 0;
+  padding: 0.95rem 1rem 1rem;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--term-ink);
+  white-space: pre;
+  overflow-wrap: normal;
+  word-break: normal;
+  tab-size: 4;
+}
+
+section p,
+section ul {
+  margin: 0.9rem 0;
+}
+
+ul {
+  padding-left: 1.25rem;
+}
+
+li + li {
+  margin-top: 0.8rem;
+}
+
+.example {
+  margin: 2.1rem 0 0;
+}
+
+.example figcaption {
+  margin: 0 0 0.55rem;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #f0ebe3;
+}
+
+.example-note {
+  margin: 0 0 0.85rem;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.example .example-note:last-child {
+  margin-top: 0.9rem;
+  margin-bottom: 0;
+}
+
+.term {
+  background: var(--term-bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 100%;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+}
+
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.8rem;
+  background: #16150f;
+  border-bottom: 1px solid var(--line);
+}
+
+.term-bar span {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: #3d4a40;
+}
+
+.term-bar span:nth-child(1) {
+  background: #8a4a48;
+}
+
+.term-bar span:nth-child(2) {
+  background: #a8883c;
+}
+
+.term-bar span:nth-child(3) {
+  background: #4a7a4e;
+}
+
+.term-bar em {
+  margin-left: 0.45rem;
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.term-body {
+  margin: 0;
+  padding: 0.95rem 1rem 0.85rem;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--amber);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  tab-size: 2;
+}
+
+.term-body .cmd {
+  color: var(--amber);
+}
+
+.term-keep {
+  white-space: pre;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overflow-wrap: normal;
+  word-break: normal;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.term-keep code {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+  white-space: pre;
+}
+
+.term-out {
+  margin: 0;
+  padding: 0.75rem 1rem 1rem;
+  border-top: 1px dashed var(--line);
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--term-ink);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 1.6rem 0 2.4rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.site-footer p {
+  margin: 0.4rem 0;
+}
+
+@media (max-width: 640px) {
+  .wrap {
+    width: min(100% - 1.5rem, var(--wrap));
+  }
+
+  .masthead-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.2rem 0 1.1rem;
+  }
+
+  .logo {
+    width: 56px;
+    height: 56px;
+  }
+
+  nav {
+    width: 100%;
+  }
+
+  body {
+    font-size: 1rem;
+  }
+
+  .lede {
+    font-size: 1.05rem;
+  }
+
+  .term-body,
+  .term-out,
+  .source-body {
+    font-size: 0.74rem;
+  }
+}

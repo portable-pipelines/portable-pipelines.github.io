@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Portable Pipelines: record pipelines in the style of CMS Pipelines
+    </title>
+    <meta
+      name="description"
+      content="Portable Pipelines is a portable implementation of IBM CMS Pipelines (z/VM) for Windows, macOS, and Linux. The command is pipe."
+    />
+    <meta name="theme-color" content="#141310" />
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body id="top">
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="masthead">
+      <div class="wrap masthead-inner">
+        <a class="brand" href="#top">
+          <img
+            class="logo"
+            src="images/logo.svg"
+            width="72"
+            height="72"
+            alt="Portable Pipelines"
+          />
+          <div class="brand-text">
+            <p class="site-name">Portable Pipelines</p>
+            <p class="tagline">
+              Record pipelines in the style of CMS Pipelines, for Windows,
+              macOS, and Linux
+            </p>
+          </div>
+        </a>
+        <nav aria-label="Page">
+          <a href="#features">Features</a>
+          <a href="#examples">Examples</a>
+          <a href="#install">Install</a>
+          <a href="#about">About</a>
+          <!-- TODO: add GitHub repository link here once the code repo is public -->
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="wrap">
+      <p class="lede">
+        <strong>Portable Pipelines</strong> is a portable implementation of
+        IBM's <strong>CMS Pipelines</strong> (z/VM), written in Rust so it can
+        run on Windows, macOS, and Linux. You call it with the command
+        <code>pipe</code>. Records move from one stage to the next through a
+        <code>|</code> connector, the same way they do on z/VM. A stage never
+        calls the next one; it only reads records and writes records. A
+        coroutine dispatcher, following John Hartmann's design, is what actually
+        moves the data along.
+      </p>
+      <p>
+        If you already know CMS Pipelines or TSO Pipelines, this is meant to
+        feel familiar, just on a PC. If you are new to it, think of a pipeline
+        as a short line of small programs that each work on records. One stage
+        might read a file, the next keep only the lines you care about, and the
+        last write what remains to the terminal. You plug them together; they
+        do not have to know about each other.
+      </p>
+
+      <section id="features" aria-labelledby="features-heading">
+        <h2 id="features-heading">Features</h2>
+        <ul>
+          <li>
+            The command is <code>pipe</code>, and the same program runs on
+            Windows, macOS, and Linux. You can take a pipeline from one machine
+            to another without changing the way you think about it.
+          </li>
+          <li>
+            Stages are coroutines. Each one only reads records in and writes
+            records out. That is Hartmann's dispatcher: because stages never
+            call one another, you can connect them in whatever order the work
+            requires.
+          </li>
+          <li>
+            Many stages have more than one output. A label on a stage, together
+            with <code>(ENDCHAR ?)</code>, lets a later pipeline read that
+            stage's secondary stream. Selection stages such as
+            <code>locate</code>, <code>nlocate</code>, <code>find</code>,
+            <code>nfind</code>, <code>take</code>, and <code>drop</code> work
+            this way, so you can keep the records that match and still do
+            something useful with the ones that do not.
+          </li>
+          <li>
+            You can write a stage in REXX. A <code>.rexx</code> or
+            <code>.rex</code> file is just another stage in the pipeline. If
+            Regina is installed and can be found, <code>pipe</code> uses it;
+            otherwise it falls back to a small embedded interpreter. From REXX
+            you can use the familiar pipeline commands:
+            <code>READTO</code>, <code>OUTPUT</code>, <code>CALLPIPE</code>,
+            <code>ADDPIPE</code>, <code>SHORT</code>,
+            <code>SELECT INPUT n</code>, and <code>SELECT OUTPUT n</code>.
+          </li>
+          <li>
+            You can write a stage in Python. A Python stage is a program you
+            write in Python that reads records from its input and writes
+            records to its output. A <code>.py</code> file is just another
+            stage in the pipeline; you use it by naming the file, just as you
+            do with a REXX stage. Each Python stage runs as its own Python 3.10
+            or later process. You can put REXX and Python stages next to each
+            other in the same pipeline when one language already has the
+            library you need.
+          </li>
+          <li>
+            Built-in stages cover a lot of everyday work: selecting records
+            (<code>locate</code>, <code>take</code>, <code>drop</code>,
+            <code>pick</code>, <code>if</code>), rearranging fields
+            (<code>spec</code>, <code>split</code>, <code>join</code>,
+            <code>chop</code>), looking up and merging
+            (<code>lookup</code>, <code>collate</code>, <code>merge</code>),
+            encoding (<code>64encode</code>, <code>qpencode</code>), splitting
+            an HTTP stream (<code>httpsplit</code>), and running a nested
+            pipeline (<code>runpipe</code>, <code>preface</code>).
+          </li>
+          <li>
+            File stages take an ordinary host path, not a CMS file ID of the
+            form <code>fn ft fm</code>. <code>&lt;</code> reads a file and must
+            stand first in the pipeline; a missing file is an error.
+            <code>&gt;</code> writes a new file or replaces one,
+            <code>&gt;&gt;</code> appends, and both of those copy records
+            through so you can still see them. <code>disk</code> behaves like
+            CMS diskfast: when it is first it reads (and a missing file counts
+            as empty), and later in the pipeline it appends.
+          </li>
+          <li>
+            When a string might contain spaces or special characters, you can
+            write it as <code>/abc/</code>, as a hex literal such as
+            <code>x616263</code>, or as a binary literal such as
+            <code>b01100001</code>.
+          </li>
+          <li>
+            If a pipeline is not doing what you expect, TRACE can show you the
+            dispatcher at work. <code>pipe --trace</code> or a
+            <code>(TRACE)</code> option writes stage start and end, READ and
+            WRITE, COMMIT, SHORT, EOF, and CALLPIPE enter and exit to stderr.
+          </li>
+          <li>
+            When a stage fails, the first line on stderr is still
+            <code>PIPE:</code> followed by the error. After that,
+            <code>pipe</code> adds the CMS-style context: which stage of which
+            pipeline, and the specification that was running.
+          </li>
+        </ul>
+      </section>
+
+      <section id="examples" aria-labelledby="examples-heading">
+        <h2 id="examples-heading">Examples</h2>
+        <p>
+          These are real pipelines from the project examples. Run them from the
+          directory that contains <code>examples/</code>, so the relative paths
+          resolve.
+        </p>
+
+        <figure class="example">
+          <figcaption>Reading a file and keeping the matching lines</figcaption>
+          <p class="example-note">
+            This is a good first look. <code>&lt;</code> reads
+            <code>examples/lines.txt</code>, <code>locate</code> keeps the
+            records that contain <code>todo</code>, and <code>console</code>
+            prints them. Records that do not match are discarded here, because
+            nothing is connected to <code>locate</code>'s secondary output.
+          </p>
+          <div class="term" role="group" aria-label="Terminal: locate">
+            <div class="term-bar" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <em>pipe</em>
+            </div>
+            <pre class="term-body"><code><span class="cmd">pipe "&lt; examples/lines.txt | locate /todo/ | console"</span></code></pre>
+            <pre class="term-out"><code>todo: one
+todo: two</code></pre>
+          </div>
+        </figure>
+
+        <figure class="example">
+          <figcaption>
+            Splitting matches and misses onto two streams
+          </figcaption>
+          <p class="example-note">
+            <code>locate</code> writes matching records to its primary output
+            and everything else to its secondary. The label <code>L:</code> and
+            <code>(ENDCHAR ?)</code> let a second pipeline read that secondary
+            stream. <code>prefix.rexx</code> tags the misses so both sets of
+            records show up on the terminal. The layout below is one stage per
+            line, with <code>?</code> starting the secondary pipeline, which
+            makes the two streams easier to see.
+          </p>
+          <div class="term" role="group" aria-label="Terminal: multistream">
+            <div class="term-bar" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <em>pipe</em>
+            </div>
+            <pre class="term-body term-keep"><code><span class="cmd">pipe "(ENDCHAR ?)
+   ./examples/emit.rexx apple banana apricot
+   | L: locate /ap/
+   | console
+?  L:
+   | ./examples/prefix.rexx miss=
+   | console"</span></code></pre>
+            <pre class="term-out"><code>apple
+apricot
+miss=banana</code></pre>
+          </div>
+        </figure>
+
+        <figure class="example">
+          <figcaption>Mixing a REXX producer with a Python filter</figcaption>
+          <p class="example-note">
+            <code>emit.rexx</code> writes a few records, then
+            <code>upper.py</code> uppercases each one. You use a Python stage
+            by naming the file, just as you do with a REXX stage, so the two
+            can sit next to each other in the same pipeline.
+          </p>
+          <div class="term" role="group" aria-label="Terminal: REXX and Python">
+            <div class="term-bar" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <em>pipe</em>
+            </div>
+            <pre class="term-body"><code><span class="cmd">pipe "examples/emit.rexx a b c | examples/upper.py | console"</span></code></pre>
+            <pre class="term-out"><code>A
+B
+C</code></pre>
+          </div>
+        </figure>
+
+        <figure class="example">
+          <figcaption>
+            Turning an ASA print report into JSON Lines
+          </figcaption>
+          <p class="example-note">
+            Some jobs still write reports the old way: page ejects, headings
+            that repeat, rule lines, and a TOTAL at the bottom. This pipeline
+            pulls out the detail rows, writes them as JSON Lines, and checks
+            that they add up to the printed total before treating the conversion
+            as good. It needs Python 3.10 or later, and Regina, because the
+            checker uses arithmetic and <code>FORMAT</code>. The form below is
+            the PowerShell layout: one double-quoted string, one stage per
+            line, and <code>?</code> starting each secondary pipeline. The
+            same specification also runs as a single line.
+          </p>
+          <div
+            class="term"
+            role="group"
+            aria-label="Terminal: ASA to JSON Lines"
+          >
+            <div class="term-bar" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <em>pipe</em>
+            </div>
+            <pre class="term-body term-keep"><code><span class="cmd">pipe "(ENDCHAR ?)
+   &lt; examples/showcase/sales-report.txt
+   | nfind 1| t: locate / TOTAL /
+   | insert /T/
+   | k: faninany
+   | examples/showcase/ctltotal.rexx
+   | o: fanin 1 0
+   | console
+?  t:
+   | verify 3.3 /0123456789/
+   | f: fanout
+   | spec 2.6 strip 1 x09 next 10.7 strip next x09 next 19.18 strip next
+          x09 next 39.5 strip next x09 next 46.10 strip next
+   | examples/showcase/tsv2json.py branch region rep units:int amount_cents:cents
+   | &gt; examples/showcase/sales.jsonl
+   | o:
+?  f:
+   | insert /D/
+   | k:"</span></code></pre>
+            <pre class="term-out"><code>{"branch": "B001", "region": "NORTH", "rep": "J. SMITH", "units": 12, "amount_cents": 144000}
+{"branch": "B002", "region": "NORTH", "rep": "A. JONES", "units": 5, "amount_cents": 60000}
+{"branch": "B003", "region": "SOUTH", "rep": "R. PATEL", "units": 20, "amount_cents": 240000}
+{"branch": "B004", "region": "EAST", "rep": "M. GARCIA", "units": 8, "amount_cents": 96000}
+{"branch": "B005", "region": "SOUTH", "rep": "L. CHEN", "units": 3, "amount_cents": 36000}
+control total OK: 5 rows, 48 units, 5760.00</code></pre>
+          </div>
+          <p class="example-note">
+            A short walk through the stages: <code>&lt;</code> reads the ASA
+            file (carriage control is in column 1). <code>nfind 1</code> drops
+            the page-eject heading lines. <code>locate / TOTAL /</code> sends
+            the TOTAL line down the primary stream and everything else down the
+            secondary. On the detail side, <code>verify</code> keeps the data
+            rows, <code>fanout</code> copies each one, <code>spec</code> cuts
+            the print columns into tab-separated fields, and
+            <code>tsv2json.py</code> writes JSON, with units as integers and
+            amounts as cents so nothing is rounded through a float.
+            <code>&gt;</code> saves that JSON and also copies it to the
+            console. On the checking side, the TOTAL and a copy of each detail
+            row are tagged and merged, and <code>ctltotal.rexx</code> adds the
+            details and compares them with the printed TOTAL.
+          </p>
+        </figure>
+
+        <h3 id="python-stage">How that Python stage talks to the pipeline</h3>
+        <p>
+          The JSON conversion is <code>examples/showcase/tsv2json.py</code>. A
+          Python stage talks to the pipeline the way a REXX stage issues
+          pipeline subcommands. Here is the whole file:
+        </p>
+        <div class="term" role="group" aria-label="Source: tsv2json.py">
+          <div class="term-bar" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <em>tsv2json.py</em>
+          </div>
+          <pre class="source-body"><code># tsv2json.py NAME[:TYPE] ... - turn tab-separated records into JSON Lines.
+#
+# One argument per column, in order. TYPE is str (default), int, or
+# cents (a money amount such as 1,440.00 written as the integer 144000,
+# so no float rounding ever reaches the JSON).
+import json
+from decimal import Decimal
+
+import pipelines as p
+
+cols = [(a.split(":") + ["str"])[:2] for a in p.args]
+for rec in p.records():
+    values = rec.decode("utf-8", "replace").split("\t")
+    obj = {}
+    for (name, kind), raw in zip(cols, values):
+        raw = raw.strip()
+        if kind == "int":
+            obj[name] = int(raw.replace(",", ""))
+        elif kind == "cents":
+            obj[name] = int(Decimal(raw.replace(",", "")) * 100)
+        else:
+            obj[name] = raw
+    p.output(json.dumps(obj, ensure_ascii=False))
+</code></pre>
+        </div>
+        <p>
+          <code>import pipelines as p</code> gives the stage its connection to
+          the pipeline. <code>p.args</code> holds the operands written after
+          the file name in the pipeline (here
+          <code>branch region rep units:int amount_cents:cents</code>).
+          <code>for rec in p.records():</code> reads each input record in
+          turn, much as a REXX stage reads with <code>READTO</code> in a loop.
+          <code>p.output(...)</code> writes a record to the output stream,
+          like the REXX <code>OUTPUT</code> subcommand. The stage ends when its
+          input runs out.
+        </p>
+      </section>
+
+      <section id="install" aria-labelledby="install-heading">
+        <h2 id="install-heading">Install</h2>
+        <p>
+          Portable Pipelines runs on Windows, macOS, and Linux. A Windows zip
+          download is coming soon. When it is ready, that will be the
+          straightforward way to try the program on a PC.
+        </p>
+        <p>
+          The zip will include <code>pipe.exe</code>, the
+          <code>examples</code> directory, Regina REXX, and the Python helper
+          package that <code>.py</code> stages use. Regina is there so
+          <code>.rexx</code> stages can run through a real interpreter, and the
+          helper package is what the Python stages import; you do not have to
+          set <code>PYTHONPATH</code> yourself.
+        </p>
+      </section>
+
+      <section id="about" aria-labelledby="about-heading">
+        <h2 id="about-heading">About</h2>
+        <p>
+          CMS Pipelines is John Hartmann's work, and this project exists
+          because of it. He designed a dispatcher in which stages are
+          coroutines: each one simply reads records and writes records, and
+          never calls the next stage. That is why you can connect stages
+          without them knowing about each other. Portable Pipelines follows
+          his design with care. We are grateful for the work he put into CMS
+          Pipelines, and this page is a small thank you.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>
+          CMS Pipelines and z/VM are trademarks of IBM. Portable Pipelines is
+          not affiliated with or endorsed by IBM.
+        </p>
+        <p>License: MIT OR Apache-2.0</p>
+        <!-- TODO: add GitHub repository link here once the code repo is public -->
+      </div>
+    </footer>
+  </body>
+</html>
