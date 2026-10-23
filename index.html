@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portable Pipelines: Hartmann-style record pipelines, anywhere</title>
+    <meta
+      name="description"
+      content="Portable Pipelines is a portable implementation of IBM CMS Pipelines (z/VM) for Windows, macOS, and Linux. The command is pipe."
+    />
+    <meta name="theme-color" content="#0e1210" />
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body id="top">
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="masthead">
+      <div class="wrap masthead-inner">
+        <a class="brand" href="#top">
+          <img
+            class="logo"
+            src="images/logo.svg"
+            width="72"
+            height="72"
+            alt="Portable Pipelines"
+          />
+          <div class="brand-text">
+            <p class="site-name">Portable Pipelines</p>
+            <p class="tagline">Hartmann-style record pipelines, anywhere</p>
+          </div>
+        </a>
+        <nav aria-label="Page">
+          <a href="#features">Features</a>
+          <a href="#examples">Examples</a>
+          <a href="#install">Install</a>
+          <a href="#about">About</a>
+          <!-- TODO: add GitHub repository link here once the code repo is public -->
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="wrap">
+      <p class="lede">
+        <strong>Portable Pipelines</strong> is a portable implementation of IBM's
+        <strong>CMS Pipelines</strong> (z/VM) for Windows, macOS, and Linux,
+        written in Rust. The command is <code>pipe</code>. Records flow through
+        stages connected by <code>|</code>. Stages never call each other; they
+        only read and write through a coroutine dispatcher, following John
+        Hartmann's design.
+      </p>
+      <p>
+        If you already know CMS or TSO Pipelines, this is that model on a PC. If
+        you do not, it is a record-oriented pipeline: each stage consumes
+        records and produces records, and the dispatcher, not the stages,
+        connects the flow.
+      </p>
+
+      <section id="features" aria-labelledby="features-heading">
+        <h2 id="features-heading">Features</h2>
+        <ul>
+          <li>
+            Runs on Windows, macOS, and Linux. The binary is named
+            <code>pipe</code>.
+          </li>
+          <li>
+            Hartmann dispatcher: stages are coroutines that only read and write
+            records. They never call the next stage.
+          </li>
+          <li>
+            Multistream pipelines. Stage labels and
+            <code>(ENDCHAR ?)</code> attach a later pipeline to the same stage's
+            secondary stream, so selection stages such as <code>locate</code>,
+            <code>nlocate</code>, <code>find</code>, <code>nfind</code>,
+            <code>take</code>, and <code>drop</code> can split records.
+          </li>
+          <li>
+            REXX stages (<code>.rexx</code> / <code>.rex</code>) run through
+            Regina when it is discoverable, otherwise through an embedded subset
+            interpreter. Supported pipeline commands:
+            <code>READTO</code>, <code>OUTPUT</code>, <code>CALLPIPE</code>,
+            <code>ADDPIPE</code>, <code>SHORT</code>,
+            <code>SELECT INPUT n</code>, <code>SELECT OUTPUT n</code>.
+          </li>
+          <li>
+            Python stages: a <code>.py</code> path is a stage verb (no
+            <code>PYTHON</code> keyword). Each stage is a separate Python 3.10+
+            process. <code>.rexx</code> and <code>.py</code> stages can be mixed
+            in the same pipeline.
+          </li>
+          <li>
+            Built-in stages include selection (<code>locate</code>,
+            <code>take</code>, <code>drop</code>, <code>pick</code>,
+            <code>if</code>), rearrangement (<code>spec</code>,
+            <code>split</code>, <code>join</code>, <code>chop</code>), lookup and
+            merge (<code>lookup</code>, <code>collate</code>,
+            <code>merge</code>), encoding (<code>64encode</code>,
+            <code>qpencode</code>), HTTP (<code>httpsplit</code>), and nested
+            pipelines (<code>runpipe</code>, <code>preface</code>).
+          </li>
+          <li>
+            File stages take a host path, not CMS <code>fn ft fm</code>.
+            <code>&lt;</code> must be first and reads (a missing file is an
+            error). <code>&gt;</code> replaces or creates.
+            <code>&gt;&gt;</code> appends or creates. Both writers copy records
+            through. <code>disk</code> is diskfast: first stage reads (missing
+            file is empty); later it appends.
+          </li>
+          <li>
+            A delimited string may be <code>/abc/</code>, a hex literal
+            (<code>x616263</code>), or a binary literal
+            (<code>b01100001</code>).
+          </li>
+          <li>
+            TRACE (<code>pipe --trace</code> or <code>(TRACE)</code>) writes
+            dispatcher debug to stderr: stage start and end, READ/WRITE, COMMIT,
+            SHORT, EOF, and CALLPIPE enter/exit.
+          </li>
+          <li>
+            When a stage fails, stderr keeps the <code>PIPE:</code> line and
+            adds CMS default-MSGLEVEL context: the stage number and the running
+            specification.
+          </li>
+        </ul>
+      </section>
+
+      <section id="examples" aria-labelledby="examples-heading">
+        <h2 id="examples-heading">Examples</h2>
+        <p>
+          Commands below are copied from the project examples. Run them from the
+          directory that contains <code>examples/</code> so relative paths
+          resolve.
+        </p>
+
+        <figure class="example">
+          <figcaption>Keep records that contain a string</figcaption>
+          <div class="term" role="group" aria-label="Terminal: locate">
+            <div class="term-bar" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <em>pipe</em>
+            </div>
+            <pre class="term-body"><code><span class="cmd">pipe "&lt; examples/lines.txt | locate /todo/ | console"</span>
+todo: one
+todo: two</code></pre>
+          </div>
+        </figure>
+
+        <figure class="example">
+          <figcaption>
+            Multistream with labels: primary hits, secondary misses
+          </figcaption>
+          <div class="term" role="group" aria-label="Terminal: multistream">
+            <div class="term-bar" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <em>pipe</em>
+            </div>
+            <pre class="term-body"><code><span class="cmd">pipe "(ENDCHAR ?) ./examples/emit.rexx apple banana apricot | L: locate /ap/ | console ? L: | ./examples/prefix.rexx miss= | console"</span>
+apple
+apricot
+miss=banana</code></pre>
+          </div>
+        </figure>
+
+        <figure class="example">
+          <figcaption>Mix a REXX producer with a Python filter</figcaption>
+          <div class="term" role="group" aria-label="Terminal: REXX and Python">
+            <div class="term-bar" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <em>pipe</em>
+            </div>
+            <pre class="term-body"><code><span class="cmd">pipe "examples/emit.rexx a b c | examples/upper.py | console"</span>
+A
+B
+C</code></pre>
+          </div>
+        </figure>
+
+        <figure class="example">
+          <figcaption>Showcase: ASA print report to JSON Lines</figcaption>
+          <p class="example-note">
+            A mainframe-era job still produces an ASA print file, with page
+            ejects, repeated page headings, rule lines, and a TOTAL line.
+            Convert the detail lines to JSON Lines, and refuse to call the
+            conversion good unless the details add up to the printed control
+            total. Needs Python 3.10+ and Regina. One line, as in the examples:
+          </p>
+          <div class="term" role="group" aria-label="Terminal: ASA to JSON Lines">
+            <div class="term-bar" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <em>pipe</em>
+            </div>
+            <pre class="term-body term-body-long"><code><span class="cmd">pipe "(ENDCHAR ?) &lt; examples/showcase/sales-report.txt | nfind 1| t: locate / TOTAL / | insert /T/ | k: faninany | examples/showcase/ctltotal.rexx | o: fanin 1 0 | console ? t: | verify 3.3 /0123456789/ | f: fanout | spec 2.6 strip 1 x09 next 10.7 strip next x09 next 19.18 strip next x09 next 39.5 strip next x09 next 46.10 strip next | examples/showcase/tsv2json.py branch region rep units:int amount_cents:cents | &gt; examples/showcase/sales.jsonl | o: ? f: | insert /D/ | k:"</span>
+{"branch": "B001", "region": "NORTH", "rep": "J. SMITH", "units": 12, "amount_cents": 144000}
+{"branch": "B002", "region": "NORTH", "rep": "A. JONES", "units": 5, "amount_cents": 60000}
+{"branch": "B003", "region": "SOUTH", "rep": "R. PATEL", "units": 20, "amount_cents": 240000}
+{"branch": "B004", "region": "EAST", "rep": "M. GARCIA", "units": 8, "amount_cents": 96000}
+{"branch": "B005", "region": "SOUTH", "rep": "L. CHEN", "units": 3, "amount_cents": 36000}
+control total OK: 5 rows, 48 units, 5760.00</code></pre>
+          </div>
+        </figure>
+      </section>
+
+      <section id="install" aria-labelledby="install-heading">
+        <h2 id="install-heading">Install</h2>
+        <p>
+          Portable Pipelines runs on Windows, macOS, and Linux. A Windows zip
+          download is coming soon.
+        </p>
+        <p>
+          The zip will contain <code>pipe.exe</code>, the
+          <code>examples</code> directory, Regina REXX, and the Python helper
+          package used by <code>.py</code> stages.
+        </p>
+      </section>
+
+      <section id="about" aria-labelledby="about-heading">
+        <h2 id="about-heading">About</h2>
+        <p>
+          CMS Pipelines is the creation of John Hartmann. He designed a
+          dispatcher in which stages are coroutines: they read records and write
+          records, and they never call one another. Portable Pipelines follows
+          that design. This page is a small tribute to him.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>
+          CMS Pipelines and z/VM are trademarks of IBM. Portable Pipelines is
+          not affiliated with or endorsed by IBM.
+        </p>
+        <p>License: MIT OR Apache-2.0</p>
+        <!-- TODO: add GitHub repository link here once the code repo is public -->
+      </div>
+    </footer>
+  </body>
+</html>
