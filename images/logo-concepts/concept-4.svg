@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 80" role="img" aria-labelledby="title">
+  <title id="title">Portable Pipelines</title>
+  <rect width="560" height="80" fill="#100f0c"/>
+  <g transform="translate(0 8)">
+    <rect width="64" height="64" rx="12" fill="#100f0c"/>
+    <rect x="5" y="18" width="18" height="6" rx="2" fill="#6a9a62"/>
+    <rect x="5" y="29" width="20" height="6" rx="2" fill="#5a8a58"/>
+    <rect x="5" y="40" width="16" height="6" rx="2" fill="#6a9a62"/>
+    <circle cx="32" cy="32" r="14" fill="#161c16" stroke="#9dcc8e" stroke-width="3"/>
+    <circle cx="32" cy="32" r="7.5" fill="#0e0f0c"/>
+    <path d="M24 24a11 11 0 0 1 10-6" fill="none" stroke="#cfe0c6" stroke-width="1.6" stroke-linecap="round" opacity="0.45"/>
+    <rect x="41" y="18" width="18" height="6" rx="2" fill="#9dcc8e"/>
+    <rect x="39" y="29" width="20" height="6" rx="2" fill="#dbb56a"/>
+    <rect x="43" y="40" width="16" height="6" rx="2" fill="#cfe0c6"/>
+  </g>
+  <text
+    x="80"
+    y="47"
+    fill="#f1ebe3"
+    font-family="ui-monospace, 'Cascadia Code', 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace"
+    font-size="28"
+    font-weight="600"
+    letter-spacing="0.02em"
+  >Portable Pipelines</text>
+</svg>

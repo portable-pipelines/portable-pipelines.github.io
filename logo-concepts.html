@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Logo concepts: Portable Pipelines</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .concepts {
+        padding-bottom: 3rem;
+      }
+      .concepts .lede {
+        margin-bottom: 0.4rem;
+      }
+      .note {
+        color: var(--muted);
+        margin-bottom: 2rem;
+      }
+      .concept {
+        margin: 2.5rem 0 0;
+        padding-top: 1.6rem;
+        border-top: 1px solid var(--line);
+      }
+      .concept h2 {
+        margin-top: 0;
+      }
+      .lockup-frame {
+        margin: 1rem 0 1.2rem;
+        padding: 1.4rem 1.2rem;
+        background: #100f0c;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        color-scheme: dark;
+      }
+      .lockup-frame object,
+      .lockup-frame img.lockup {
+        display: block;
+        width: min(100%, 560px);
+        height: auto;
+        aspect-ratio: 560 / 80;
+      }
+      .header-mock .wrap {
+        width: calc(100% - 2rem);
+      }
+      .sizes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.4rem 2rem;
+        align-items: flex-end;
+        margin: 1rem 0 1.6rem;
+      }
+      .size {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .size img {
+        display: block;
+        background: #100f0c;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+      .size.px64 img {
+        width: 64px;
+        height: 64px;
+        border-radius: 12px;
+      }
+      .size.px32 img {
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+      }
+      .size.px16 img {
+        width: 16px;
+        height: 16px;
+        border-radius: 3px;
+      }
+      .mock-label {
+        margin: 0 0 0.45rem;
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .header-mock {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 0 0 0.5rem;
+      }
+      .header-mock .masthead {
+        border-bottom: 0;
+      }
+      .now {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        margin: 1rem 0 1.6rem;
+      }
+      .now img {
+        width: 48px;
+        height: 48px;
+        border-radius: 10px;
+        box-shadow: 0 0 0 1px var(--line);
+      }
+      .now p {
+        margin: 0;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="wrap masthead-inner">
+        <a class="brand" href="index.html">
+          <img
+            class="logo"
+            src="images/logo.svg"
+            width="72"
+            height="72"
+            alt="Portable Pipelines (current live mark)"
+          />
+          <div class="brand-text">
+            <p class="site-name">Logo concepts</p>
+            <p class="tagline">For review. The live header is unchanged.</p>
+          </div>
+        </a>
+        <nav aria-label="Concepts">
+          <a href="#concept-1">One</a>
+          <a href="#concept-2">Two</a>
+          <a href="#concept-3">Three</a>
+          <a href="#concept-4">Four</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="wrap concepts">
+      <p class="lede">
+        Four marks for the top of the site. Each is a hand-written SVG on the
+        existing dark terminal palette, with a square version that should still
+        read at favicon size. Nothing on this page is wired into the live
+        header yet.
+      </p>
+      <p class="note">
+        Concept 1 lets records drift along the pipe. That motion is off when
+        the system asks for reduced motion.
+      </p>
+
+      <div class="now">
+        <img src="images/logo.svg" width="48" height="48" alt="" />
+        <p>Current live mark, for comparison.</p>
+      </div>
+
+      <article class="concept" id="concept-1">
+        <h2>Concept 1</h2>
+        <p>
+          A run of physical pipe with flanges and a T-junction, so a record can
+          take the secondary stream. Records move along the bore.
+        </p>
+        <div class="lockup-frame">
+          <object
+            data="images/logo-concepts/concept-1.svg"
+            type="image/svg+xml"
+            class="lockup"
+            aria-label="Concept 1 lockup"
+          ></object>
+        </div>
+        <div class="sizes">
+          <div class="size px64">
+            <img
+              src="images/logo-concepts/concept-1-mark.svg"
+              width="64"
+              height="64"
+              alt=""
+            />
+            64px
+          </div>
+          <div class="size px32">
+            <img
+              src="images/logo-concepts/concept-1-mark.svg"
+              width="32"
+              height="32"
+              alt=""
+            />
+            32px
+          </div>
+          <div class="size px16">
+            <img
+              src="images/logo-concepts/concept-1-mark.svg"
+              width="16"
+              height="16"
+              alt=""
+            />
+            16px
+          </div>
+        </div>
+        <p class="mock-label">Header mock</p>
+        <div class="header-mock" id="mock-1">
+          <header class="masthead">
+            <div class="wrap masthead-inner">
+              <a class="brand" href="#concept-1">
+                <img
+                  class="logo"
+                  src="images/logo-concepts/concept-1-mark.svg"
+                  width="72"
+                  height="72"
+                  alt=""
+                />
+                <div class="brand-text">
+                  <p class="site-name">Portable Pipelines</p>
+                  <p class="tagline">
+                    Record pipelines in the style of CMS Pipelines, for
+                    Windows, macOS, and Linux
+                  </p>
+                </div>
+              </a>
+              <nav>
+                <a href="#concept-1">Features</a>
+                <a href="#concept-1">Examples</a>
+                <a href="#concept-1">Install</a>
+                <a href="#concept-1">About</a>
+              </nav>
+            </div>
+          </header>
+        </div>
+      </article>
+
+      <article class="concept" id="concept-2">
+        <h2>Concept 2</h2>
+        <p>
+          Stage boxes with a split into two streams, in the spirit of an
+          ENDCHAR multistream layout: one stage, primary and secondary out.
+        </p>
+        <div class="lockup-frame">
+          <img
+            class="lockup"
+            src="images/logo-concepts/concept-2.svg"
+            alt="Concept 2 lockup"
+          />
+        </div>
+        <div class="sizes">
+          <div class="size px64">
+            <img
+              src="images/logo-concepts/concept-2-mark.svg"
+              width="64"
+              height="64"
+              alt=""
+            />
+            64px
+          </div>
+          <div class="size px32">
+            <img
+              src="images/logo-concepts/concept-2-mark.svg"
+              width="32"
+              height="32"
+              alt=""
+            />
+            32px
+          </div>
+          <div class="size px16">
+            <img
+              src="images/logo-concepts/concept-2-mark.svg"
+              width="16"
+              height="16"
+              alt=""
+            />
+            16px
+          </div>
+        </div>
+        <p class="mock-label">Header mock</p>
+        <div class="header-mock" id="mock-2">
+          <header class="masthead">
+            <div class="wrap masthead-inner">
+              <a class="brand" href="#concept-2">
+                <img
+                  class="logo"
+                  src="images/logo-concepts/concept-2-mark.svg"
+                  width="72"
+                  height="72"
+                  alt=""
+                />
+                <div class="brand-text">
+                  <p class="site-name">Portable Pipelines</p>
+                  <p class="tagline">
+                    Record pipelines in the style of CMS Pipelines, for
+                    Windows, macOS, and Linux
+                  </p>
+                </div>
+              </a>
+              <nav>
+                <a href="#concept-2">Features</a>
+                <a href="#concept-2">Examples</a>
+                <a href="#concept-2">Install</a>
+                <a href="#concept-2">About</a>
+              </nav>
+            </div>
+          </header>
+        </div>
+      </article>
+
+      <article class="concept" id="concept-3">
+        <h2>Concept 3</h2>
+        <p>
+          A terminal prompt beside a standing pipe that reads as the
+          <code>|</code> character: flanges on the barrel, a dark bore, a small
+          highlight.
+        </p>
+        <div class="lockup-frame">
+          <img
+            class="lockup"
+            src="images/logo-concepts/concept-3.svg"
+            alt="Concept 3 lockup"
+          />
+        </div>
+        <div class="sizes">
+          <div class="size px64">
+            <img
+              src="images/logo-concepts/concept-3-mark.svg"
+              width="64"
+              height="64"
+              alt=""
+            />
+            64px
+          </div>
+          <div class="size px32">
+            <img
+              src="images/logo-concepts/concept-3-mark.svg"
+              width="32"
+              height="32"
+              alt=""
+            />
+            32px
+          </div>
+          <div class="size px16">
+            <img
+              src="images/logo-concepts/concept-3-mark.svg"
+              width="16"
+              height="16"
+              alt=""
+            />
+            16px
+          </div>
+        </div>
+        <p class="mock-label">Header mock</p>
+        <div class="header-mock" id="mock-3">
+          <header class="masthead">
+            <div class="wrap masthead-inner">
+              <a class="brand" href="#concept-3">
+                <img
+                  class="logo"
+                  src="images/logo-concepts/concept-3-mark.svg"
+                  width="72"
+                  height="72"
+                  alt=""
+                />
+                <div class="brand-text">
+                  <p class="site-name">Portable Pipelines</p>
+                  <p class="tagline">
+                    Record pipelines in the style of CMS Pipelines, for
+                    Windows, macOS, and Linux
+                  </p>
+                </div>
+              </a>
+              <nav>
+                <a href="#concept-3">Features</a>
+                <a href="#concept-3">Examples</a>
+                <a href="#concept-3">Install</a>
+                <a href="#concept-3">About</a>
+              </nav>
+            </div>
+          </header>
+        </div>
+      </article>
+
+      <article class="concept" id="concept-4">
+        <h2>Concept 4</h2>
+        <p>
+          Dim records enter a pipe mouth on the left and come out transformed
+          on the right, in phosphor and amber.
+        </p>
+        <div class="lockup-frame">
+          <img
+            class="lockup"
+            src="images/logo-concepts/concept-4.svg"
+            alt="Concept 4 lockup"
+          />
+        </div>
+        <div class="sizes">
+          <div class="size px64">
+            <img
+              src="images/logo-concepts/concept-4-mark.svg"
+              width="64"
+              height="64"
+              alt=""
+            />
+            64px
+          </div>
+          <div class="size px32">
+            <img
+              src="images/logo-concepts/concept-4-mark.svg"
+              width="32"
+              height="32"
+              alt=""
+            />
+            32px
+          </div>
+          <div class="size px16">
+            <img
+              src="images/logo-concepts/concept-4-mark.svg"
+              width="16"
+              height="16"
+              alt=""
+            />
+            16px
+          </div>
+        </div>
+        <p class="mock-label">Header mock</p>
+        <div class="header-mock" id="mock-4">
+          <header class="masthead">
+            <div class="wrap masthead-inner">
+              <a class="brand" href="#concept-4">
+                <img
+                  class="logo"
+                  src="images/logo-concepts/concept-4-mark.svg"
+                  width="72"
+                  height="72"
+                  alt=""
+                />
+                <div class="brand-text">
+                  <p class="site-name">Portable Pipelines</p>
+                  <p class="tagline">
+                    Record pipelines in the style of CMS Pipelines, for
+                    Windows, macOS, and Linux
+                  </p>
+                </div>
+              </a>
+              <nav>
+                <a href="#concept-4">Features</a>
+                <a href="#concept-4">Examples</a>
+                <a href="#concept-4">Install</a>
+                <a href="#concept-4">About</a>
+              </nav>
+            </div>
+          </header>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

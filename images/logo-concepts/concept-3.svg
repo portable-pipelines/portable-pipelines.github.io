@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 80" role="img" aria-labelledby="title">
+  <title id="title">Portable Pipelines</title>
+  <rect width="560" height="80" fill="#100f0c"/>
+  <g transform="translate(0 8)">
+    <rect width="64" height="64" rx="12" fill="#100f0c"/>
+    <path d="M11 20l11 12-11 12" fill="none" stroke="#dbb56a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="32" y="8" width="18" height="48" rx="9" fill="#9dcc8e"/>
+    <rect x="36.5" y="12" width="9" height="40" rx="4.5" fill="#161c16"/>
+    <rect x="29" y="18" width="24" height="5" rx="1.2" fill="#dbb56a"/>
+    <rect x="29" y="41" width="24" height="5" rx="1.2" fill="#dbb56a"/>
+    <rect x="38.5" y="14" width="3" height="14" rx="1.2" fill="#cfe0c6" opacity="0.35"/>
+  </g>
+  <text
+    x="80"
+    y="47"
+    fill="#f1ebe3"
+    font-family="ui-monospace, 'Cascadia Code', 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace"
+    font-size="28"
+    font-weight="600"
+    letter-spacing="0.02em"
+  >Portable Pipelines</text>
+</svg>
