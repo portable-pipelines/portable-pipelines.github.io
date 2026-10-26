@@ -419,7 +419,7 @@ sh ./examples/run-examples.sh</span></code></pre>
             <span></span><span></span><span></span>
             <em>pipe</em>
           </div>
-          <pre class="term-body"><code><span class="cmd">.\pipe.exe "(end ?) < examples\users.txt | a: strfind /USER / | spec 1-* 1 / / next | j: juxtapose | console ? a: | j:"</span></code></pre>
+          <pre class="term-body"><code><span class="cmd">.\pipe.exe "(end ?) &lt; examples\users.txt | a: strfind /USER / | spec 1-* 1 / / next | j: juxtapose | console ? a: | j:"</span></code></pre>
           <pre class="term-out"><code>USER AAA MDISK 191
 USER AAA MDISK 192
 USER AAA MDISK 193
@@ -431,7 +431,7 @@ USER BBB MDISK 192</code></pre>
             <span></span><span></span><span></span>
             <em>pipe</em>
           </div>
-          <pre class="term-body"><code><span class="cmd">./pipe "(end ?) < examples/users.txt | a: strfind /USER / | spec 1-* 1 / / next | j: juxtapose | console ? a: | j:"</span></code></pre>
+          <pre class="term-body"><code><span class="cmd">./pipe "(end ?) &lt; examples/users.txt | a: strfind /USER / | spec 1-* 1 / / next | j: juxtapose | console ? a: | j:"</span></code></pre>
           <pre class="term-out"><code>USER AAA MDISK 191
 USER AAA MDISK 192
 USER AAA MDISK 193
