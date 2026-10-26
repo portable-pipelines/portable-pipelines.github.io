@@ -40,7 +40,7 @@
           <a href="#examples">Examples</a>
           <a href="#install">Install</a>
           <a href="#about">About</a>
-          <!-- TODO: add GitHub repository link here once the code repo is public -->
+          <a href="https://github.com/portable-pipelines/portable-pipelines">GitHub</a>
         </nav>
       </div>
     </header>
@@ -348,17 +348,93 @@ for rec in p.records():
       <section id="install" aria-labelledby="install-heading">
         <h2 id="install-heading">Install</h2>
         <p>
-          Portable Pipelines runs on Windows, macOS, and Linux. A Windows zip
-          download is coming soon. When it is ready, that will be the
-          straightforward way to try the program on a PC.
+          Portable Pipelines runs on Windows, macOS, and Linux. Each download
+          has <code>pipe</code>, the <code>examples</code> directory with a
+          guided tour, and the Python helper package that <code>.py</code>
+          stages use, so you do not have to set <code>PYTHONPATH</code>
+          yourself. Pick the file for your platform from the
+          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest">latest release</a>.
         </p>
+
+        <h3 id="install-windows">Windows</h3>
         <p>
-          The zip will include <code>pipe.exe</code>, the
-          <code>examples</code> directory, Regina REXX, and the Python helper
-          package that <code>.py</code> stages use. Regina is there so
-          <code>.rexx</code> stages can run through a real interpreter, and the
-          helper package is what the Python stages import; you do not have to
-          set <code>PYTHONPATH</code> yourself.
+          Download the Windows x64 zip from the
+          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest">latest release</a>
+          and extract it into a folder of its own. The zip includes
+          <code>pipe.exe</code> and Regina REXX, so <code>.rexx</code> stages
+          run through a real interpreter. Open a terminal in that folder and
+          try:
+        </p>
+        <div class="term" role="group" aria-label="Terminal: Windows first run">
+          <div class="term-bar" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <em>pipe</em>
+          </div>
+          <pre class="term-body"><code><span class="cmd">.\pipe.exe "literal hello| console"</span></code></pre>
+          <pre class="term-out"><code>hello</code></pre>
+        </div>
+        <p>
+          In Command Prompt you can leave off the <code>.\</code>. Then take
+          the guided tour:
+        </p>
+        <div class="term" role="group" aria-label="Terminal: Windows tour">
+          <div class="term-bar" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <em>powershell</em>
+          </div>
+          <pre class="term-body"><code><span class="cmd">powershell -ExecutionPolicy Bypass -File .\examples\run-examples.ps1</span></code></pre>
+        </div>
+
+        <h3 id="install-unix">Linux and macOS</h3>
+        <p>
+          Download the tarball for your machine from the
+          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest">latest release</a>:
+          Linux x86_64, macOS on Apple silicon (arm64), or macOS on Intel
+          (x86_64). Unpack it, change into the folder it creates, and try:
+        </p>
+        <div class="term" role="group" aria-label="Terminal: Linux and macOS first run">
+          <div class="term-bar" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <em>sh</em>
+          </div>
+          <pre class="term-body"><code><span class="cmd">tar -xzf pipe-linux-x86_64-*.tar.gz
+cd pipe-linux-x86_64
+./pipe "literal hello| console"
+sh ./examples/run-examples.sh</span></code></pre>
+        </div>
+        <p>
+          The tarballs do not include Regina or Python. Without Regina,
+          <code>.rexx</code> stages use the embedded subset interpreter. To
+          run them through real Regina, install it with
+          <code>sudo apt-get install -y regina-rexx libregina3-dev</code> on
+          Debian or Ubuntu, or <code>brew install regina-rexx</code> on macOS.
+        </p>
+
+        <h3 id="install-notes">Good to know</h3>
+        <ul>
+          <li>
+            In <code>literal hello| console</code> there is no space before the
+            <code>|</code>. Any space after the literal text becomes part of
+            the record.
+          </li>
+          <li>
+            Python stages need Python 3.10 or later on the machine, on every
+            platform. The tour skips the Python demos if Python is not found.
+          </li>
+          <li>
+            To run <code>pipe</code> from any directory, add its folder to your
+            <code>PATH</code>.
+          </li>
+          <li>
+            The
+            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/master/examples/README.md">examples tour</a>
+            has more pipelines to copy and paste, and
+            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/master/docs/STATUS.md">what Portable Pipelines can do today</a>
+            lists every stage you can run.
+          </li>
+        </ul>
+        <p>
+          <a href="https://github.com/portable-pipelines/portable-pipelines">View the code on GitHub</a>
         </p>
       </section>
 
@@ -390,7 +466,9 @@ for rec in p.records():
           not affiliated with or endorsed by IBM.
         </p>
         <p>License: MIT OR Apache-2.0</p>
-        <!-- TODO: add GitHub repository link here once the code repo is public -->
+        <p>
+          <a href="https://github.com/portable-pipelines/portable-pipelines">GitHub</a>
+        </p>
       </div>
     </footer>
   </body>
