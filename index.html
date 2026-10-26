@@ -178,6 +178,37 @@ todo: two</code></pre>
           </div>
         </figure>
 
+        <figure class="example" id="user-mdisk-example">
+          <figcaption>USER and MDISK</figcaption>
+          <p class="example-note">
+            Given a file where each USER line is followed by its MDISK lines, this pipeline puts each user's name in front of that user's disk lines. It uses <code>strfind</code> to split the lines, <code>spec</code> to add a trailing blank, and <code>juxtapose</code> to join them. The sample file <code>users.txt</code> is in the <code>examples</code> folder of every download.
+          </p>
+          <div class="term" role="group" aria-label="Terminal: USER and MDISK on Windows">
+            <div class="term-bar" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <em>pipe</em>
+            </div>
+            <pre class="term-body"><code><span class="cmd">.\pipe.exe "(end ?) &lt; examples\users.txt | a: strfind /USER / | spec 1-* 1 / / next | j: juxtapose | console ? a: | j:"</span></code></pre>
+            <pre class="term-out"><code>USER AAA MDISK 191
+USER AAA MDISK 192
+USER AAA MDISK 193
+USER BBB MDISK 191
+USER BBB MDISK 192</code></pre>
+          </div>
+          <div class="term" role="group" aria-label="Terminal: USER and MDISK on Linux and macOS">
+            <div class="term-bar" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <em>pipe</em>
+            </div>
+            <pre class="term-body"><code><span class="cmd">./pipe "(end ?) &lt; examples/users.txt | a: strfind /USER / | spec 1-* 1 / / next | j: juxtapose | console ? a: | j:"</span></code></pre>
+            <pre class="term-out"><code>USER AAA MDISK 191
+USER AAA MDISK 192
+USER AAA MDISK 193
+USER BBB MDISK 191
+USER BBB MDISK 192</code></pre>
+          </div>
+        </figure>
+
         <figure class="example">
           <figcaption>
             Splitting matches and misses onto two streams
@@ -409,35 +440,6 @@ sh ./examples/run-examples.sh</span></code></pre>
           <code>sudo apt-get install -y regina-rexx libregina3-dev</code> on
           Debian or Ubuntu, or <code>brew install regina-rexx</code> on macOS.
         </p>
-
-        <h3 id="user-mdisk-example">A second example: USER and MDISK</h3>
-        <p>
-          Given a file where each USER line is followed by its MDISK lines, this pipeline puts each user's name in front of that user's disk lines. It uses <code>strfind</code> to split the lines, <code>spec</code> to add a trailing blank, and <code>juxtapose</code> to join them. The sample file <code>users.txt</code> is in the <code>examples</code> folder of every download.
-        </p>
-        <div class="term" role="group" aria-label="Terminal: USER and MDISK on Windows">
-          <div class="term-bar" aria-hidden="true">
-            <span></span><span></span><span></span>
-            <em>pipe</em>
-          </div>
-          <pre class="term-body"><code><span class="cmd">.\pipe.exe "(end ?) &lt; examples\users.txt | a: strfind /USER / | spec 1-* 1 / / next | j: juxtapose | console ? a: | j:"</span></code></pre>
-          <pre class="term-out"><code>USER AAA MDISK 191
-USER AAA MDISK 192
-USER AAA MDISK 193
-USER BBB MDISK 191
-USER BBB MDISK 192</code></pre>
-        </div>
-        <div class="term" role="group" aria-label="Terminal: USER and MDISK on Linux and macOS">
-          <div class="term-bar" aria-hidden="true">
-            <span></span><span></span><span></span>
-            <em>pipe</em>
-          </div>
-          <pre class="term-body"><code><span class="cmd">./pipe "(end ?) &lt; examples/users.txt | a: strfind /USER / | spec 1-* 1 / / next | j: juxtapose | console ? a: | j:"</span></code></pre>
-          <pre class="term-out"><code>USER AAA MDISK 191
-USER AAA MDISK 192
-USER AAA MDISK 193
-USER BBB MDISK 191
-USER BBB MDISK 192</code></pre>
-        </div>
 
         <h3 id="install-notes">Good to know</h3>
         <ul>
