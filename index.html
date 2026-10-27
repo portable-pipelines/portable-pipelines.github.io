@@ -440,6 +440,22 @@ sh ./examples/run-examples.sh</span></code></pre>
           <code>sudo apt-get install -y regina-rexx libregina3-dev</code> on
           Debian or Ubuntu, or <code>brew install regina-rexx</code> on macOS.
         </p>
+        <p>
+          On a Mac, macOS may refuse to open <code>pipe</code> the first time
+          because it was downloaded from the internet. If that happens, run
+          this once from the unpacked folder:
+        </p>
+        <div class="term" role="group" aria-label="Terminal: Remove quarantine attribute">
+          <div class="term-bar" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <em>sh</em>
+          </div>
+          <pre class="term-body"><code><span class="cmd">xattr -r -d com.apple.quarantine .</span></code></pre>
+        </div>
+        <p>
+          Add <code>sudo</code> in front only if it reports a permissions
+          error. After that, <code>./pipe</code> runs normally.
+        </p>
 
         <h3 id="install-notes">Good to know</h3>
         <ul>
