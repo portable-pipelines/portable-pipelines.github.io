@@ -122,6 +122,14 @@
             pipeline (<code>runpipe</code>, <code>preface</code>).
           </li>
           <li>
+            You can work with JSON and CSV by field name. A range such as
+            <code>$qty</code>, or a path into a nested document, names the
+            value you want, so you do not have to count columns. You can
+            split an array into one record for each element, look records
+            up by a named field, and write the result back out as JSON or
+            CSV.
+          </li>
+          <li>
             File stages take an ordinary host path, not a CMS file ID of the
             form <code>fn ft fm</code>. <code>&lt;</code> reads a file and must
             stand first in the pipeline; a missing file is an error.
@@ -385,17 +393,52 @@ for rec in p.records():
           has <code>pipe</code>, the <code>examples</code> directory with a
           guided tour, and the Python helper package that <code>.py</code>
           stages use, so you do not have to set <code>PYTHONPATH</code>
-          yourself. Pick the file for your platform from the
-          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest">latest release</a>.
+          yourself. These links always fetch the newest release, so a
+          bookmark stays current. Each archive has a matching
+          <code>.sha256</code> file that names that same archive, so you can
+          check the download.
+        </p>
+        <ul>
+          <li>
+            For Windows x64, download
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest/download/pipe-windows-x64.zip">pipe-windows-x64.zip</a>.
+            The checksum is
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest/download/pipe-windows-x64.zip.sha256">pipe-windows-x64.zip.sha256</a>.
+          </li>
+          <li>
+            For Linux x86_64, download
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest/download/pipe-linux-x86_64.tar.gz">pipe-linux-x86_64.tar.gz</a>.
+            The checksum is
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest/download/pipe-linux-x86_64.tar.gz.sha256">pipe-linux-x86_64.tar.gz.sha256</a>.
+          </li>
+          <li>
+            For macOS on Apple silicon, download
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest/download/pipe-macos-arm64.tar.gz">pipe-macos-arm64.tar.gz</a>.
+            The checksum is
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest/download/pipe-macos-arm64.tar.gz.sha256">pipe-macos-arm64.tar.gz.sha256</a>.
+          </li>
+          <li>
+            For macOS on Intel, download
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest/download/pipe-macos-x86_64.tar.gz">pipe-macos-x86_64.tar.gz</a>.
+            The checksum is
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest/download/pipe-macos-x86_64.tar.gz.sha256">pipe-macos-x86_64.tar.gz.sha256</a>.
+          </li>
+        </ul>
+        <p>
+          You can still open the
+          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest">latest release</a>
+          page if you would rather choose a file there.
         </p>
 
         <h3 id="install-windows">Windows</h3>
         <p>
-          Download the Windows x64 zip from the
-          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest">latest release</a>
+          Download
+          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest/download/pipe-windows-x64.zip">pipe-windows-x64.zip</a>
           and extract it into a folder of its own. The zip includes
           <code>pipe.exe</code> and Regina REXX, so <code>.rexx</code> stages
-          run through a real interpreter. Open a terminal in that folder and
+          run through a real interpreter. <code>pipe.exe</code> is
+          Authenticode-signed, which usually means fewer antivirus delays
+          the first time you run it. Open a terminal in that folder and
           try:
         </p>
         <div class="term" role="group" aria-label="Terminal: Windows first run">
@@ -420,21 +463,29 @@ for rec in p.records():
 
         <h3 id="install-unix">Linux and macOS</h3>
         <p>
-          Download the tarball for your machine from the
-          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest">latest release</a>:
-          Linux x86_64, macOS on Apple silicon (arm64), or macOS on Intel
-          (x86_64). Unpack it, change into the folder it creates, and try:
+          Download the tarball for your machine:
+          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest/download/pipe-linux-x86_64.tar.gz">Linux x86_64</a>,
+          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest/download/pipe-macos-arm64.tar.gz">macOS on Apple silicon (arm64)</a>,
+          or
+          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest/download/pipe-macos-x86_64.tar.gz">macOS on Intel (x86_64)</a>.
+          Unpack it, change into the folder it creates, and try:
         </p>
         <div class="term" role="group" aria-label="Terminal: Linux and macOS first run">
           <div class="term-bar" aria-hidden="true">
             <span></span><span></span><span></span>
             <em>sh</em>
           </div>
-          <pre class="term-body"><code><span class="cmd">tar -xzf pipe-linux-x86_64-*.tar.gz
+          <pre class="term-body"><code><span class="cmd">tar -xzf pipe-linux-x86_64.tar.gz
 cd pipe-linux-x86_64
 ./pipe "literal hello| console"
 sh ./examples/run-examples.sh</span></code></pre>
         </div>
+        <p>
+          Those commands use the Linux archive. On a Mac, unpack the file
+          you downloaded instead. It creates a folder named
+          <code>pipe-macos-arm64</code> or <code>pipe-macos-x86_64</code>,
+          and <code>./pipe</code> is the same command after that.
+        </p>
         <p>
           The tarballs do not include Regina or Python. Without Regina,
           <code>.rexx</code> stages use the embedded subset interpreter. To
