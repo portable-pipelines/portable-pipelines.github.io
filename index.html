@@ -36,8 +36,10 @@
           </div>
         </a>
         <nav aria-label="Page">
+          <a href="#gui">GUI</a>
           <a href="#features">Features</a>
           <a href="#examples">Examples</a>
+          <a href="#whats-new">What's new</a>
           <a href="#install">Install</a>
           <a href="#about">About</a>
           <a href="https://github.com/portable-pipelines/portable-pipelines">GitHub</a>
@@ -64,10 +66,73 @@
         last write what remains to the terminal. You plug them together; they
         do not have to know about each other.
       </p>
+      <p>
+        The current release is 0.2.0. Run <code>pipe --gui</code> from the
+        unpacked download to open the native GUI. See
+        <a href="#whats-new">What's new in 0.2.0</a>.
+      </p>
+
+      <section id="gui" aria-labelledby="gui-heading">
+        <h2 id="gui-heading">The GUI</h2>
+        <p>
+          <code>pipe --gui</code> opens the Portable Pipelines GUI, a native
+          desktop window that draws the stages, steps one record at a time,
+          and shows the records as a spreadsheet. Each download includes
+          <code>pipe-gui</code> next to <code>pipe</code>, so the command
+          works from the unpacked folder. Press <strong>Run</strong> or
+          <strong>Step</strong> to start the session.
+        </p>
+        <figure class="shot">
+          <img
+            src="images/gui-locate-run.png"
+            width="1425"
+            height="891"
+            alt="The Portable Pipelines GUI after a run: LITERAL, LOCATE, and CONSOLE stage boxes in a row. LOCATE shows two records out and one discarded with the down-arrow mark. The console lists apricot and apple."
+          />
+          <figcaption>
+            After <code>pipe --gui</code>: a three-fruit pipeline with
+            <code>locate /ap/</code>. Apple and apricot went through; banana
+            was discarded (↓).
+          </figcaption>
+        </figure>
+        <p>
+          From the unpacked folder on Windows:
+        </p>
+        <div class="term" role="group" aria-label="Terminal: open the GUI on Windows">
+          <div class="term-bar" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <em>pipe</em>
+          </div>
+          <pre class="term-body"><code><span class="cmd">pipe --gui
+pipe --gui examples\marina\to-csv.pipe</span></code></pre>
+        </div>
+        <p>
+          On Linux and macOS:
+        </p>
+        <div class="term" role="group" aria-label="Terminal: open the GUI on Linux and macOS">
+          <div class="term-bar" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <em>pipe</em>
+          </div>
+          <pre class="term-body"><code><span class="cmd">./pipe --gui
+./pipe --gui examples/marina/to-csv.pipe</span></code></pre>
+        </div>
+        <p>
+          The
+          <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.2.0/docs/gui.md">GUI guide</a>
+          has a tutorial, walkthroughs, and a reference.
+        </p>
+      </section>
 
       <section id="features" aria-labelledby="features-heading">
         <h2 id="features-heading">Features</h2>
         <ul>
+          <li>
+            <code>pipe --gui</code> opens the Portable Pipelines GUI. The
+            window draws the stages, steps one record at a time, and shows
+            the records as a spreadsheet. Each download includes
+            <code>pipe-gui</code> next to <code>pipe</code>.
+          </li>
           <li>
             The command is <code>pipe</code>, and the same program runs on
             Windows, macOS, and Linux. You can take a pipeline from one machine
@@ -386,17 +451,87 @@ for rec in p.records():
         </p>
       </section>
 
+      <section id="whats-new" aria-labelledby="whats-new-heading">
+        <h2 id="whats-new-heading">What's new in 0.2.0</h2>
+        <p>
+          The current release is 0.2.0. <code>pipe --version</code> prints
+          <code>pipe 0.2.0</code>. The
+          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/tag/v0.2.0">v0.2.0 release page</a>
+          has the full notes, and the
+          <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.2.0/docs/gui.md">GUI guide</a>
+          covers the GUI.
+        </p>
+        <ul>
+          <li>
+            Native GUI. <code>pipe --gui</code> opens a desktop window that
+            draws the stages, steps one record at a time, and shows the
+            records as a spreadsheet. <strong>Run</strong> starts a live
+            session; <strong>Step</strong> takes one record cycle. Stage
+            boxes show how many records went in and out. The lines between
+            stages are connections. Discarded records use the ↓ mark. Hover
+            a stage for a compact spreadsheet of received and sent records;
+            the Records pane is the same grid, pinned. Quit and the close
+            box stop the session.
+          </li>
+          <li>
+            The GUI ships in the download. Each archive includes
+            <code>pipe-gui</code> next to <code>pipe</code>, so
+            <code>pipe --gui</code> works from the unpacked folder.
+          </li>
+          <li>
+            <code>json objects</code> reads consecutive JSON objects and
+            writes each complete object as one record as soon as it closes.
+            Pretty-printed across records, adjacent in one record, or one
+            object per line. A later <code>take 10</code> can stop without
+            parsing the rest of the file. Top-level arrays still use
+            <code>json array</code>.
+          </li>
+          <li>
+            Cedar Cove marina. Four CSV tables (vessels, owners, berths,
+            work orders) to nested JSON documents and back, using LOOKUP,
+            COLLATE, <code>json split</code> / <code>json collect</code>,
+            and small Python stages. The worked example is
+            <code>examples/marina/</code> in the download.
+          </li>
+          <li>
+            Docs in the download. The public <code>docs/</code> folder is in
+            the Windows zip and the Unix tarballs, next to
+            <code>examples/</code>.
+          </li>
+          <li>
+            128 of the 254 built-in programs in the Author's Edition 1.1.11
+            catalog run today, some with documented limits. JSON and CSV sit
+            beside that catalog. REXX pipeline commands are 23 complete and
+            3 limited.
+            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.2.0/docs/STATUS.md">What Portable Pipelines can do today</a>
+            lists every stage.
+          </li>
+          <li>
+            Stable download names. Each archive is uploaded under its
+            versioned name
+            (<code>pipe-windows-x64-v0.2.0.zip</code>,
+            <code>pipe-linux-x86_64-v0.2.0.tar.gz</code>,
+            <code>pipe-macos-arm64-v0.2.0.tar.gz</code>,
+            <code>pipe-macos-x86_64-v0.2.0.tar.gz</code>)
+            and again under a name with no version
+            (<code>pipe-windows-x64.zip</code> and the rest). Each has a
+            matching <code>.sha256</code> file.
+          </li>
+        </ul>
+      </section>
+
       <section id="install" aria-labelledby="install-heading">
         <h2 id="install-heading">Install</h2>
         <p>
-          Portable Pipelines runs on Windows, macOS, and Linux. Each download
-          has <code>pipe</code>, the <code>examples</code> directory with a
-          guided tour, and the Python helper package that <code>.py</code>
-          stages use, so you do not have to set <code>PYTHONPATH</code>
-          yourself. These links always fetch the newest release, so a
-          bookmark stays current. Each archive has a matching
-          <code>.sha256</code> file that names that same archive, so you can
-          check the download.
+          The current release is 0.2.0. Portable Pipelines runs on Windows,
+          macOS, and Linux. Each download has <code>pipe</code> and
+          <code>pipe-gui</code>, the <code>examples</code> directory with a
+          guided tour, the public <code>docs/</code> folder, and the Python
+          helper package that <code>.py</code> stages use, so you do not
+          have to set <code>PYTHONPATH</code> yourself. These links always
+          fetch the newest release, so a bookmark stays current. Each
+          archive has a matching <code>.sha256</code> file that names that
+          same archive, so you can check the download.
         </p>
         <ul>
           <li>
@@ -425,8 +560,34 @@ for rec in p.records():
           </li>
         </ul>
         <p>
+          The same files for 0.2.0 are also published with the version in
+          the name:
+        </p>
+        <ul>
+          <li>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.2.0/pipe-windows-x64-v0.2.0.zip">pipe-windows-x64-v0.2.0.zip</a>
+            and
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.2.0/pipe-windows-x64-v0.2.0.zip.sha256">pipe-windows-x64-v0.2.0.zip.sha256</a>.
+          </li>
+          <li>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.2.0/pipe-linux-x86_64-v0.2.0.tar.gz">pipe-linux-x86_64-v0.2.0.tar.gz</a>
+            and
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.2.0/pipe-linux-x86_64-v0.2.0.tar.gz.sha256">pipe-linux-x86_64-v0.2.0.tar.gz.sha256</a>.
+          </li>
+          <li>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.2.0/pipe-macos-arm64-v0.2.0.tar.gz">pipe-macos-arm64-v0.2.0.tar.gz</a>
+            and
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.2.0/pipe-macos-arm64-v0.2.0.tar.gz.sha256">pipe-macos-arm64-v0.2.0.tar.gz.sha256</a>.
+          </li>
+          <li>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.2.0/pipe-macos-x86_64-v0.2.0.tar.gz">pipe-macos-x86_64-v0.2.0.tar.gz</a>
+            and
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.2.0/pipe-macos-x86_64-v0.2.0.tar.gz.sha256">pipe-macos-x86_64-v0.2.0.tar.gz.sha256</a>.
+          </li>
+        </ul>
+        <p>
           You can still open the
-          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest">latest release</a>
+          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/tag/v0.2.0">v0.2.0 release</a>
           page if you would rather choose a file there.
         </p>
 
@@ -435,11 +596,11 @@ for rec in p.records():
           Download
           <a href="https://github.com/portable-pipelines/portable-pipelines/releases/latest/download/pipe-windows-x64.zip">pipe-windows-x64.zip</a>
           and extract it into a folder of its own. The zip includes
-          <code>pipe.exe</code> and Regina REXX, so <code>.rexx</code> stages
-          run through a real interpreter. <code>pipe.exe</code> is
-          Authenticode-signed, which usually means fewer antivirus delays
-          the first time you run it. Open a terminal in that folder and
-          try:
+          <code>pipe.exe</code>, <code>pipe-gui.exe</code>, and Regina REXX,
+          so <code>.rexx</code> stages run through a real interpreter.
+          <code>pipe.exe</code> is Authenticode-signed, which usually means
+          fewer antivirus delays the first time you run it. Open a terminal
+          in that folder and try:
         </p>
         <div class="term" role="group" aria-label="Terminal: Windows first run">
           <div class="term-bar" aria-hidden="true">
@@ -450,8 +611,18 @@ for rec in p.records():
           <pre class="term-out"><code>hello</code></pre>
         </div>
         <p>
-          In Command Prompt you can leave off the <code>.\</code>. Then take
-          the guided tour:
+          In Command Prompt you can leave off the <code>.\</code>. To open
+          the GUI from that folder:
+        </p>
+        <div class="term" role="group" aria-label="Terminal: Windows GUI">
+          <div class="term-bar" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <em>pipe</em>
+          </div>
+          <pre class="term-body"><code><span class="cmd">.\pipe.exe --gui</span></code></pre>
+        </div>
+        <p>
+          Then take the guided tour:
         </p>
         <div class="term" role="group" aria-label="Terminal: Windows tour">
           <div class="term-bar" aria-hidden="true">
@@ -478,6 +649,7 @@ for rec in p.records():
           <pre class="term-body"><code><span class="cmd">tar -xzf pipe-linux-x86_64.tar.gz
 cd pipe-linux-x86_64
 ./pipe "literal hello| console"
+./pipe --gui
 sh ./examples/run-examples.sh</span></code></pre>
         </div>
         <p>
@@ -522,15 +694,22 @@ sh ./examples/run-examples.sh</span></code></pre>
             platform. The tour skips the Python demos if Python is not found.
           </li>
           <li>
+            To check which version you have, run <code>pipe --version</code>
+            (<code>.\pipe.exe --version</code> on Windows). It prints
+            <code>pipe 0.2.0</code>.
+          </li>
+          <li>
             To run <code>pipe</code> from any directory, add its folder to your
             <code>PATH</code>.
           </li>
           <li>
             The
-            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/master/examples/README.md">examples tour</a>
-            has more pipelines to copy and paste, and
-            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/master/docs/STATUS.md">what Portable Pipelines can do today</a>
-            lists every stage you can run.
+            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.2.0/examples/README.md">examples tour</a>
+            has more pipelines to copy and paste,
+            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.2.0/docs/STATUS.md">what Portable Pipelines can do today</a>
+            lists every stage you can run, and the
+            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.2.0/docs/gui.md">GUI guide</a>
+            covers <code>pipe --gui</code>.
           </li>
         </ul>
         <p>

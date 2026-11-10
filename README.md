@@ -9,6 +9,7 @@ There is no build step, no framework, and no CDN.
 - `index.html`: page content
 - `styles.css`: layout and theme
 - `images/logo.svg`: mark and favicon
+- `images/gui-locate-run.png`: GUI screenshot from the v0.2.0 docs
 - `.nojekyll`: tell GitHub Pages not to process the site with Jekyll
 
 Edit the HTML and CSS, then push to `main`.
