@@ -246,6 +246,30 @@ li + li {
   margin-bottom: 0;
 }
 
+.shot {
+  margin: 1.15rem 0 1.35rem;
+  background: var(--term-bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 100%;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+}
+
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.shot figcaption {
+  margin: 0;
+  padding: 0.7rem 0.95rem 0.85rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
 .term {
   background: var(--term-bg);
   border: 1px solid var(--line);
