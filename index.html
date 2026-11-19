@@ -67,9 +67,9 @@
         do not have to know about each other.
       </p>
       <p>
-        The current release is v0.3.1. Run <code>pipe --gui</code> from the
+        The current release is v0.3.2. Run <code>pipe --gui</code> from the
         unpacked download to open the native GUI. See
-        <a href="#whats-new">What's new in v0.3.1</a>.
+        <a href="#whats-new">What's new in v0.3.2</a>.
       </p>
 
       <section id="gui" aria-labelledby="gui-heading">
@@ -147,7 +147,7 @@ pipe --gui examples\marina\to-csv.pipe</span></code></pre>
         </div>
         <p>
           The
-          <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.1/docs/gui.md">GUI guide</a>
+          <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.2/docs/gui.md">GUI guide</a>
           has a tutorial, walkthroughs, and a reference.
         </p>
       </section>
@@ -494,15 +494,36 @@ for rec in p.records():
       </section>
 
       <section id="whats-new" aria-labelledby="whats-new-heading">
-        <h2 id="whats-new-heading">What's new in v0.3.1</h2>
+        <h2 id="whats-new-heading">What's new in v0.3.2</h2>
         <p>
-          The current release is v0.3.1, published 14 November 2026
-          (v0.3.0 was 12 November). <code>pipe --version</code> prints
-          <code>pipe 0.3.1</code>. The
-          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/tag/v0.3.1">v0.3.1 release page</a>
+          The current release is v0.3.2, published 19 November 2026
+          (v0.3.1 was 14 November). <code>pipe --version</code> prints
+          <code>pipe 0.3.2</code>. The
+          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/tag/v0.3.2">v0.3.2 release page</a>
           has the full notes, and the
-          <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.1/docs/gui.md">GUI guide</a>
+          <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.2/docs/gui.md">GUI guide</a>
           covers the GUI.
+        </p>
+        <h3 id="whats-new-032">v0.3.2</h3>
+        <p>
+          The mouse wheel scrolls the pane under the pointer.
+          Shift+wheel scrolls sideways. Ctrl+wheel zooms on the pointer
+          (⌘+wheel on macOS). Connections take a short right-angle
+          route around stage boxes, with no looping lines. Each
+          parallel long connection has its own track. Palette groups
+          start collapsed.
+        </p>
+        <p>
+          A parse or operand error in Source shows as a wrapping line
+          under the editor. Right-click
+          <strong>Console and messages</strong> and choose
+          <strong>Clear</strong>, or press <strong>Clear</strong> in
+          that pane's header, to empty the log and CONSOLE output shown
+          there. The last folder a <code>.pipe</code> was opened or
+          saved, Layout, and <strong>Show records</strong> are
+          remembered between sessions. After Run, Console says
+          <code>Run started. Any files the pipeline writes are written
+          now.</code>
         </p>
         <h3 id="whats-new-031">v0.3.1</h3>
         <p>
@@ -624,16 +645,16 @@ for rec in p.records():
             catalog run today, some with documented limits. JSON and CSV sit
             beside that catalog. REXX pipeline commands are 23 complete and
             3 limited.
-            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.1/docs/STATUS.md">What Portable Pipelines can do today</a>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.2/docs/STATUS.md">What Portable Pipelines can do today</a>
             lists every stage.
           </li>
           <li>
             Stable download names. Each archive is uploaded under its
             versioned name
-            (<code>pipe-windows-x64-v0.3.1.zip</code>,
-            <code>pipe-linux-x86_64-v0.3.1.tar.gz</code>,
-            <code>pipe-macos-arm64-v0.3.1.tar.gz</code>,
-            <code>pipe-macos-x86_64-v0.3.1.tar.gz</code>)
+            (<code>pipe-windows-x64-v0.3.2.zip</code>,
+            <code>pipe-linux-x86_64-v0.3.2.tar.gz</code>,
+            <code>pipe-macos-arm64-v0.3.2.tar.gz</code>,
+            <code>pipe-macos-x86_64-v0.3.2.tar.gz</code>)
             and again under a name with no version
             (<code>pipe-windows-x64.zip</code> and the rest). Each has a
             matching <code>.sha256</code> file.
@@ -644,13 +665,13 @@ for rec in p.records():
       <section id="install" aria-labelledby="install-heading">
         <h2 id="install-heading">Install</h2>
         <p>
-          The current release is v0.3.1. Portable Pipelines runs on Windows,
+          The current release is v0.3.2. Portable Pipelines runs on Windows,
           macOS, and Linux. Each download has <code>pipe</code> and
           <code>pipe-gui</code>, the <code>examples</code> directory with a
           guided tour, the public <code>docs/</code> folder, and the Python
           helper package that <code>.py</code> stages use, so you do not
           have to set <code>PYTHONPATH</code> yourself. These links always
-          fetch the current release (v0.3.1), so a bookmark stays current. Each
+          fetch the current release (v0.3.2), so a bookmark stays current. Each
           archive has a matching <code>.sha256</code> file that names that
           same archive, so you can check the download.
         </p>
@@ -681,34 +702,34 @@ for rec in p.records():
           </li>
         </ul>
         <p>
-          The same files for v0.3.1 are also published with the version in
+          The same files for v0.3.2 are also published with the version in
           the name:
         </p>
         <ul>
           <li>
-            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.1/pipe-windows-x64-v0.3.1.zip">pipe-windows-x64-v0.3.1.zip</a>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.2/pipe-windows-x64-v0.3.2.zip">pipe-windows-x64-v0.3.2.zip</a>
             and
-            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.1/pipe-windows-x64-v0.3.1.zip.sha256">pipe-windows-x64-v0.3.1.zip.sha256</a>.
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.2/pipe-windows-x64-v0.3.2.zip.sha256">pipe-windows-x64-v0.3.2.zip.sha256</a>.
           </li>
           <li>
-            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.1/pipe-linux-x86_64-v0.3.1.tar.gz">pipe-linux-x86_64-v0.3.1.tar.gz</a>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.2/pipe-linux-x86_64-v0.3.2.tar.gz">pipe-linux-x86_64-v0.3.2.tar.gz</a>
             and
-            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.1/pipe-linux-x86_64-v0.3.1.tar.gz.sha256">pipe-linux-x86_64-v0.3.1.tar.gz.sha256</a>.
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.2/pipe-linux-x86_64-v0.3.2.tar.gz.sha256">pipe-linux-x86_64-v0.3.2.tar.gz.sha256</a>.
           </li>
           <li>
-            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.1/pipe-macos-arm64-v0.3.1.tar.gz">pipe-macos-arm64-v0.3.1.tar.gz</a>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.2/pipe-macos-arm64-v0.3.2.tar.gz">pipe-macos-arm64-v0.3.2.tar.gz</a>
             and
-            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.1/pipe-macos-arm64-v0.3.1.tar.gz.sha256">pipe-macos-arm64-v0.3.1.tar.gz.sha256</a>.
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.2/pipe-macos-arm64-v0.3.2.tar.gz.sha256">pipe-macos-arm64-v0.3.2.tar.gz.sha256</a>.
           </li>
           <li>
-            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.1/pipe-macos-x86_64-v0.3.1.tar.gz">pipe-macos-x86_64-v0.3.1.tar.gz</a>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.2/pipe-macos-x86_64-v0.3.2.tar.gz">pipe-macos-x86_64-v0.3.2.tar.gz</a>
             and
-            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.1/pipe-macos-x86_64-v0.3.1.tar.gz.sha256">pipe-macos-x86_64-v0.3.1.tar.gz.sha256</a>.
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.2/pipe-macos-x86_64-v0.3.2.tar.gz.sha256">pipe-macos-x86_64-v0.3.2.tar.gz.sha256</a>.
           </li>
         </ul>
         <p>
           You can still open the
-          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/tag/v0.3.1">v0.3.1 release</a>
+          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/tag/v0.3.2">v0.3.2 release</a>
           page if you would rather choose a file there.
         </p>
 
@@ -817,7 +838,7 @@ sh ./examples/run-examples.sh</span></code></pre>
           <li>
             To check which version you have, run <code>pipe --version</code>
             (<code>.\pipe.exe --version</code> on Windows). It prints
-            <code>pipe 0.3.1</code>.
+            <code>pipe 0.3.2</code>.
           </li>
           <li>
             To run <code>pipe</code> from any directory, add its folder to your
@@ -825,11 +846,11 @@ sh ./examples/run-examples.sh</span></code></pre>
           </li>
           <li>
             The
-            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.1/examples/README.md">examples tour</a>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.2/examples/README.md">examples tour</a>
             has more pipelines to copy and paste,
-            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.1/docs/STATUS.md">what Portable Pipelines can do today</a>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.2/docs/STATUS.md">what Portable Pipelines can do today</a>
             lists every stage you can run, and the
-            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.1/docs/gui.md">GUI guide</a>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.2/docs/gui.md">GUI guide</a>
             covers <code>pipe --gui</code>.
           </li>
         </ul>
