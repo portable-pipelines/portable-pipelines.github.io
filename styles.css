@@ -385,6 +385,58 @@ li + li {
   margin: 0.4rem 0;
 }
 
+/* A wide Mermaid figure may be broader than the text column. */
+.shot-wide {
+  width: min(100vw - 2.25rem, 72rem);
+  max-width: none;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.shot-wide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 48rem;
+  padding: 0.75rem 0.6rem 0.5rem;
+  background: var(--term-bg);
+}
+
+.mermaid-src {
+  margin: -0.85rem 0 1.35rem;
+  background: var(--term-bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.mermaid-src summary {
+  cursor: pointer;
+  padding: 0.7rem 0.95rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.mermaid-src summary:hover {
+  color: var(--ink);
+}
+
+.mermaid-src summary:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+}
+
+.mermaid-src[open] summary {
+  border-bottom: 1px solid var(--line);
+}
+
+.mermaid-src .source-body {
+  margin: 0;
+}
+
 @media (max-width: 640px) {
   .wrap {
     width: min(100% - 1.5rem, var(--wrap));
@@ -418,5 +470,16 @@ li + li {
   .term-out,
   .source-body {
     font-size: 0.74rem;
+  }
+
+  .shot-wide {
+    width: min(100%, 100vw - 1.5rem);
+    left: auto;
+    transform: none;
+  }
+
+  .shot-wide img {
+    min-width: 40rem;
+    padding: 0.5rem 0.4rem 0.35rem;
   }
 }

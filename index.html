@@ -67,9 +67,9 @@
         do not have to know about each other.
       </p>
       <p>
-        The current release is v0.3.2. Run <code>pipe --gui</code> from the
+        The current release is v0.3.3. Run <code>pipe --gui</code> from the
         unpacked download to open the native GUI. See
-        <a href="#whats-new">What's new in v0.3.2</a>.
+        <a href="#whats-new">What's new in v0.3.3</a>.
       </p>
 
       <section id="gui" aria-labelledby="gui-heading">
@@ -123,6 +123,74 @@
             was discarded (↓).
           </figcaption>
         </figure>
+        <h3 id="copy-as-mermaid">Copy as Mermaid</h3>
+        <p>
+          <strong>Copy as Mermaid</strong>, on the title row next to Open,
+          Save, and Save as, and on the canvas context menu, copies the
+          shown pipe to the clipboard as a Mermaid flowchart. The
+          diagram follows the Layout setting (Horizontal is left to
+          right, Vertical is top to bottom), nodes show the stage and
+          its operands, and secondary outputs are labeled, such as
+          unmatched on LOCATE and stream 1 on FANOUT.
+        </p>
+        <figure class="shot shot-wide">
+          <img
+            src="images/copy-as-mermaid.svg"
+            width="1306"
+            height="916"
+            alt="A Mermaid flowchart of examples/marina/to-csv.pipe in Vertical layout. A file stage reads vessels.jsonl into FANOUT, which writes four CSV files: vessels on the primary output, and owners, berths, and work orders on streams 1, 2, and 3."
+          />
+          <figcaption>
+            The flowchart that Copy as Mermaid produces for
+            <code>examples/marina/to-csv.pipe</code>, in Vertical
+            layout. FANOUT's secondary outputs are labeled stream 1,
+            stream 2, and stream 3.
+          </figcaption>
+        </figure>
+        <details class="mermaid-src">
+          <summary>Mermaid source</summary>
+          <pre class="source-body">```mermaid
+flowchart TD
+  s0[&quot;#lt; examples/marina/vessels.jsonl&quot;]
+  s1[&quot;F: FANOUT&quot;]
+  s2[&quot;JSON keep $vessel_id $name $type $berth_id $owner_id&quot;]
+  s3[&quot;CSV write&quot;]
+  s4[&quot;#gt; examples/marina/out/vessels.csv&quot;]
+  s6[&quot;SPEC $owner 1&quot;]
+  s7[&quot;SORT $owner_id&quot;]
+  s8[&quot;UNIQUE&quot;]
+  s9[&quot;CSV write&quot;]
+  s10[&quot;#gt; examples/marina/out/owners.csv&quot;]
+  s12[&quot;SPEC $berth 1&quot;]
+  s13[&quot;SORT $berth_id&quot;]
+  s14[&quot;UNIQUE&quot;]
+  s15[&quot;CSV write&quot;]
+  s16[&quot;#gt; examples/marina/out/berths.csv&quot;]
+  s18[&quot;JSON split $work_orders&quot;]
+  s19[&quot;SORT $work_order_id&quot;]
+  s20[&quot;CSV write&quot;]
+  s21[&quot;#gt; examples/marina/out/work_orders.csv&quot;]
+  s0 --&gt; s1
+  s1 --&gt; s2
+  s1 --&gt;|&quot;stream 1&quot;| s6
+  s1 --&gt;|&quot;stream 2&quot;| s12
+  s1 --&gt;|&quot;stream 3&quot;| s18
+  s2 --&gt; s3
+  s3 --&gt; s4
+  s6 --&gt; s7
+  s7 --&gt; s8
+  s8 --&gt; s9
+  s9 --&gt; s10
+  s12 --&gt; s13
+  s13 --&gt; s14
+  s14 --&gt; s15
+  s15 --&gt; s16
+  s18 --&gt; s19
+  s19 --&gt; s20
+  s20 --&gt; s21
+```
+</pre>
+        </details>
         <p>
           From the unpacked folder on Windows:
         </p>
@@ -147,7 +215,7 @@ pipe --gui examples\marina\to-csv.pipe</span></code></pre>
         </div>
         <p>
           The
-          <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.2/docs/gui.md">GUI guide</a>
+          <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.3/docs/gui.md">GUI guide</a>
           has a tutorial, walkthroughs, and a reference.
         </p>
       </section>
@@ -162,9 +230,10 @@ pipe --gui examples\marina\to-csv.pipe</span></code></pre>
             splice the stage in. Source writes the pipe as you go. Open
             and Save work with <code>.pipe</code> files. A Properties pane
             shows the selected stage. You can wire a secondary stream,
-            delete a stage, and choose Horizontal or Vertical layout. A
-            missing <code>$field</code> warns, naming the stage and the
-            fields the record does have.
+            delete a stage, and choose Horizontal or Vertical layout.
+            <strong>Copy as Mermaid</strong> copies the shown pipe as a
+            flowchart. A missing <code>$field</code> warns, naming the
+            stage and the fields the record does have.
           </li>
           <li>
             <code>pipe --gui</code> also runs and steps through a pipe.
@@ -494,15 +563,28 @@ for rec in p.records():
       </section>
 
       <section id="whats-new" aria-labelledby="whats-new-heading">
-        <h2 id="whats-new-heading">What's new in v0.3.2</h2>
+        <h2 id="whats-new-heading">What's new in v0.3.3</h2>
         <p>
-          The current release is v0.3.2, published 19 November 2026
-          (v0.3.1 was 14 November). <code>pipe --version</code> prints
-          <code>pipe 0.3.2</code>. The
-          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/tag/v0.3.2">v0.3.2 release page</a>
+          The current release is v0.3.3, published 25 November 2026
+          (v0.3.2 was 19 November). <code>pipe --version</code> prints
+          <code>pipe 0.3.3</code>. The
+          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/tag/v0.3.3">v0.3.3 release page</a>
           has the full notes, and the
-          <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.2/docs/gui.md">GUI guide</a>
+          <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.3/docs/gui.md">GUI guide</a>
           covers the GUI.
+        </p>
+        <h3 id="whats-new-033">v0.3.3</h3>
+        <p>
+          <strong>Copy as Mermaid</strong>, on the title row next to
+          Open, Save, and Save as, and on the canvas context menu,
+          copies the shown pipe to the clipboard as a Mermaid
+          flowchart. The diagram follows the Layout setting:
+          Horizontal is left to right, and Vertical is top to bottom.
+          Nodes show the stage and its operands. Secondary outputs are
+          labeled, such as unmatched on LOCATE and stream 1 on FANOUT.
+          A sample from <code>examples/marina/to-csv.pipe</code> is in
+          <a href="#copy-as-mermaid">the GUI section</a>. Command-line
+          <code>pipe</code> is unchanged.
         </p>
         <h3 id="whats-new-032">v0.3.2</h3>
         <p>
@@ -645,16 +727,16 @@ for rec in p.records():
             catalog run today, some with documented limits. JSON and CSV sit
             beside that catalog. REXX pipeline commands are 23 complete and
             3 limited.
-            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.2/docs/STATUS.md">What Portable Pipelines can do today</a>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.3/docs/STATUS.md">What Portable Pipelines can do today</a>
             lists every stage.
           </li>
           <li>
             Stable download names. Each archive is uploaded under its
             versioned name
-            (<code>pipe-windows-x64-v0.3.2.zip</code>,
-            <code>pipe-linux-x86_64-v0.3.2.tar.gz</code>,
-            <code>pipe-macos-arm64-v0.3.2.tar.gz</code>,
-            <code>pipe-macos-x86_64-v0.3.2.tar.gz</code>)
+            (<code>pipe-windows-x64-v0.3.3.zip</code>,
+            <code>pipe-linux-x86_64-v0.3.3.tar.gz</code>,
+            <code>pipe-macos-arm64-v0.3.3.tar.gz</code>,
+            <code>pipe-macos-x86_64-v0.3.3.tar.gz</code>)
             and again under a name with no version
             (<code>pipe-windows-x64.zip</code> and the rest). Each has a
             matching <code>.sha256</code> file.
@@ -665,13 +747,13 @@ for rec in p.records():
       <section id="install" aria-labelledby="install-heading">
         <h2 id="install-heading">Install</h2>
         <p>
-          The current release is v0.3.2. Portable Pipelines runs on Windows,
+          The current release is v0.3.3. Portable Pipelines runs on Windows,
           macOS, and Linux. Each download has <code>pipe</code> and
           <code>pipe-gui</code>, the <code>examples</code> directory with a
           guided tour, the public <code>docs/</code> folder, and the Python
           helper package that <code>.py</code> stages use, so you do not
           have to set <code>PYTHONPATH</code> yourself. These links always
-          fetch the current release (v0.3.2), so a bookmark stays current. Each
+          fetch the current release (v0.3.3), so a bookmark stays current. Each
           archive has a matching <code>.sha256</code> file that names that
           same archive, so you can check the download.
         </p>
@@ -702,34 +784,34 @@ for rec in p.records():
           </li>
         </ul>
         <p>
-          The same files for v0.3.2 are also published with the version in
+          The same files for v0.3.3 are also published with the version in
           the name:
         </p>
         <ul>
           <li>
-            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.2/pipe-windows-x64-v0.3.2.zip">pipe-windows-x64-v0.3.2.zip</a>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.3/pipe-windows-x64-v0.3.3.zip">pipe-windows-x64-v0.3.3.zip</a>
             and
-            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.2/pipe-windows-x64-v0.3.2.zip.sha256">pipe-windows-x64-v0.3.2.zip.sha256</a>.
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.3/pipe-windows-x64-v0.3.3.zip.sha256">pipe-windows-x64-v0.3.3.zip.sha256</a>.
           </li>
           <li>
-            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.2/pipe-linux-x86_64-v0.3.2.tar.gz">pipe-linux-x86_64-v0.3.2.tar.gz</a>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.3/pipe-linux-x86_64-v0.3.3.tar.gz">pipe-linux-x86_64-v0.3.3.tar.gz</a>
             and
-            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.2/pipe-linux-x86_64-v0.3.2.tar.gz.sha256">pipe-linux-x86_64-v0.3.2.tar.gz.sha256</a>.
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.3/pipe-linux-x86_64-v0.3.3.tar.gz.sha256">pipe-linux-x86_64-v0.3.3.tar.gz.sha256</a>.
           </li>
           <li>
-            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.2/pipe-macos-arm64-v0.3.2.tar.gz">pipe-macos-arm64-v0.3.2.tar.gz</a>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.3/pipe-macos-arm64-v0.3.3.tar.gz">pipe-macos-arm64-v0.3.3.tar.gz</a>
             and
-            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.2/pipe-macos-arm64-v0.3.2.tar.gz.sha256">pipe-macos-arm64-v0.3.2.tar.gz.sha256</a>.
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.3/pipe-macos-arm64-v0.3.3.tar.gz.sha256">pipe-macos-arm64-v0.3.3.tar.gz.sha256</a>.
           </li>
           <li>
-            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.2/pipe-macos-x86_64-v0.3.2.tar.gz">pipe-macos-x86_64-v0.3.2.tar.gz</a>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.3/pipe-macos-x86_64-v0.3.3.tar.gz">pipe-macos-x86_64-v0.3.3.tar.gz</a>
             and
-            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.2/pipe-macos-x86_64-v0.3.2.tar.gz.sha256">pipe-macos-x86_64-v0.3.2.tar.gz.sha256</a>.
+            <a href="https://github.com/portable-pipelines/portable-pipelines/releases/download/v0.3.3/pipe-macos-x86_64-v0.3.3.tar.gz.sha256">pipe-macos-x86_64-v0.3.3.tar.gz.sha256</a>.
           </li>
         </ul>
         <p>
           You can still open the
-          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/tag/v0.3.2">v0.3.2 release</a>
+          <a href="https://github.com/portable-pipelines/portable-pipelines/releases/tag/v0.3.3">v0.3.3 release</a>
           page if you would rather choose a file there.
         </p>
 
@@ -838,7 +920,7 @@ sh ./examples/run-examples.sh</span></code></pre>
           <li>
             To check which version you have, run <code>pipe --version</code>
             (<code>.\pipe.exe --version</code> on Windows). It prints
-            <code>pipe 0.3.2</code>.
+            <code>pipe 0.3.3</code>.
           </li>
           <li>
             To run <code>pipe</code> from any directory, add its folder to your
@@ -846,11 +928,11 @@ sh ./examples/run-examples.sh</span></code></pre>
           </li>
           <li>
             The
-            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.2/examples/README.md">examples tour</a>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.3/examples/README.md">examples tour</a>
             has more pipelines to copy and paste,
-            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.2/docs/STATUS.md">what Portable Pipelines can do today</a>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.3/docs/STATUS.md">what Portable Pipelines can do today</a>
             lists every stage you can run, and the
-            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.2/docs/gui.md">GUI guide</a>
+            <a href="https://github.com/portable-pipelines/portable-pipelines/blob/v0.3.3/docs/gui.md">GUI guide</a>
             covers <code>pipe --gui</code>.
           </li>
         </ul>
